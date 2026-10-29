@@ -46,3 +46,4 @@ Lần chạy `20261029_092231_60aa1b` ở giai đoạn 02: 5 epoch mỗi mô hì
 - Tệp cũ/tạm → `RAC` kèm lý do. Không coi checkpoint, dữ liệu `.gz` hay gói kết quả ZIP là rác chỉ vì có bản giải nén.
 
 Không xóa tệp gốc trong lần sắp xếp này. [Nhật ký chuyển tệp](TAI_LIEU/NHAT_KY_SAP_XEP.json) lưu đường dẫn cũ/mới và mã SHA256 trước chỉnh sửa để đối chiếu.
+yea
