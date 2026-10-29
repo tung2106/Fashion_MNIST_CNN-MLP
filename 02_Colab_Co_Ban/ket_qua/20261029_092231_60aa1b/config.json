@@ -1,0 +1,23 @@
+{
+  "seed": 42,
+  "batch_size": 128,
+  "epochs": 5,
+  "lr": 0.001,
+  "profile": "learning_full_data_5_epochs",
+  "device": "cuda",
+  "python": "3.13.16",
+  "torch": "2.11.0+cu130",
+  "torchvision": "0.26.0+cu130",
+  "classes": [
+    "T-shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+  ]
+}

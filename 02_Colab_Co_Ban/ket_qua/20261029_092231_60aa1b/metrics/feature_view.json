@@ -1,0 +1,9 @@
+{
+  "sample_id": 0,
+  "layers": [
+    "features.1",
+    "features.4"
+  ],
+  "checkpoint_hash": "802bd81367565ae061563363660b03b545ba23d1273808e9dd665add3f933dd7",
+  "scale": "per channel"
+}

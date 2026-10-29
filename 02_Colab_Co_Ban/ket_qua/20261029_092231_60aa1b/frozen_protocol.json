@@ -1,0 +1,24 @@
+{
+  "run_id": "20261029_092231_60aa1b",
+  "selection": "minimum validation loss; earliest tie",
+  "checkpoints": {
+    "MLP": "cfe39706c310d296e163a7e5218559ef1bc8918f9f82c7957d2c9fe500bf426f",
+    "CNN": "802bd81367565ae061563363660b03b545ba23d1273808e9dd665add3f933dd7"
+  },
+  "split_hash": "778e61dc813f3a03e6c547311f02ea498936a6d094f6849569b573f5b209ef58",
+  "frozen_at_utc": "2026-10-29T09:24:53.249204+00:00",
+  "training": {
+    "MLP": {
+      "best_epoch": 5,
+      "best_val_loss": 0.31051852472623187,
+      "train_seconds": 63.00980684399997,
+      "parameters": 101770
+    },
+    "CNN": {
+      "best_epoch": 5,
+      "best_val_loss": 0.2341205857594808,
+      "train_seconds": 69.27927337599999,
+      "parameters": 206922
+    }
+  }
+}

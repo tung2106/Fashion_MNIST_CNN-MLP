@@ -1,0 +1,6 @@
+{
+  "best_epoch": 5,
+  "best_val_loss": 0.2341205857594808,
+  "train_seconds": 69.27927337599999,
+  "parameters": 206922
+}

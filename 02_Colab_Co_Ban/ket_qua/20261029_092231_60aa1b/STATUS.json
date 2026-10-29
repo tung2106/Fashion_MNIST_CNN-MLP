@@ -1,0 +1,17 @@
+{
+  "stage": "completed_basic_learning",
+  "run_id": "20261029_092231_60aa1b",
+  "trained": [
+    "MLP",
+    "CNN"
+  ],
+  "epochs": 5,
+  "test_samples": 10000,
+  "limits": [
+    "one seed",
+    "five epochs",
+    "no ablation",
+    "no robustness benchmark"
+  ],
+  "consistency_checks": "PASS: matrix total, diagonal accuracy, row support"
+}
