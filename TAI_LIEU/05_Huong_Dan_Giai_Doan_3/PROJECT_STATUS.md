@@ -35,10 +35,10 @@ Artifacts giữ trên máy và được loại khỏi Git mặc định. Các đ
 
 ## Chưa thực hiện ở giai đoạn 3
 
-- Huấn luyện đầy đủ 5 epoch trên 54k ảnh và đánh giá test 10k của mã module mới.
+- Đánh giá test 10k của mã module mới; huấn luyện đầy đủ đã hoàn tất theo cập nhật bên dưới.
 - Ablation Dropout, BatchNorm, augmentation; nhiều seed; phân tích đặc trưng/lỗi sâu.
 - Chức năng resume chính xác, evaluate-only và ứng dụng demo.
-- Push thay đổi giai đoạn 3 lên GitHub. Notebook học chậm của giai đoạn 2 đã được push ở bước trước.
+- Mã giai đoạn 3 đã push GitHub; xem cập nhật bên dưới.
 
 Giữ tiêu chí min validation loss để khớp notebook học tập. Khi chuyển sang thí nghiệm cải tiến với tiêu chí macro-F1 theo đặc tả, cần ghi giao thức mới và chạy đối chứng cùng tiêu chí. Không dùng test để chọn cấu hình.
 
@@ -49,3 +49,17 @@ Giữ tiêu chí min validation loss để khớp notebook học tập. Khi chuy
 ## Cập nhật quy định chạy 31/10/2026
 
 Từ yêu cầu mới của người dùng: chỉ train trên Google Colab GPU, không train/smoke/unit test có optimizer trên máy cá nhân. Main có chặn nếu thiếu Colab hoặc CUDA. Notebook 02_Colab_GPU_Train.ipynb phục vụ clone/train/lưu kết quả. Kiểm tra local lần cập nhật này chỉ compile cú pháp, không thực thi train. Trạng thái push và cloud run được cập nhật sau khi xác minh.
+
+## Đã train đầy đủ trên Colab GPU — 31/10/2026
+
+- [Notebook đã chạy và lưu trên Drive](https://colab.research.google.com/drive/1WiCTnJhuDdR6ovY-NCgWCHWbYDRqWdjH).
+- Commit mã huấn luyện: `1142ebf2f3edebf0599c6613d6bc563a04a08fed`.
+- Thiết bị Tesla T4; PyTorch 2.11.0+cu130. Không train trên máy cá nhân trong lần này.
+- Run ID trên máy ảo UTC: `20261031_100341_ac198a38` (17:03 giờ Việt Nam).
+- 54k train / 6k validation; 5 epoch/model; không đánh giá test.
+- MLP: best epoch 5, validation loss 0.31051852472623187, validation accuracy 0.885833 (bảng hiển thị làm tròn), 101770 tham số, train+validation 64.16 giây.
+- CNN: best epoch 5, validation loss 0.2341205857594808, validation accuracy 0.913167 (bảng hiển thị làm tròn), 206922 tham số, train+validation 71.11 giây.
+- Mốc TRAIN_COMPLETE đã xuất hiện, cả hai history đủ 5 epoch, ô đọc bảng/biểu đồ và đóng ZIP đã chạy.
+- Gói kết quả trên Colab: `/content/fashion_stage3_9e26351e/03_Thuc_Nghiem_Cai_Tien/artifacts/20261031_100341_ac198a38.zip`.
+- Đã yêu cầu tải ZIP nhưng trình duyệt tích hợp chưa xác nhận tải thành công. Chưa coi checkpoint đã sao lưu về máy. Trong Colab, mở Files → đường dẫn trên → Download ZIP trước khi ngắt runtime. File máy ảo không tự lưu cùng notebook Drive.
+- Bản notebook trên GitHub sau đó bổ sung hiển thị log subprocess theo dòng; thay đổi hiển thị này chưa chạy lại và không thay thuật toán.

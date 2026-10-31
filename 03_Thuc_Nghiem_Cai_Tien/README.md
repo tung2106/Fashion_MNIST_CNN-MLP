@@ -59,3 +59,7 @@ Các kiểm tra có bước optimizer trong tests cũng chỉ chạy trên Colab
 - Test đã được xem ở giai đoạn 2, không gọi là holdout chưa từng biết.
 - Feature maps mới minh họa 4 kênh Conv đầu trên test ID 0. Phân tích sâu, ablation Dropout/BN/augmentation, demo và báo cáo còn ở các bước tiếp theo; chưa hoàn tất góp ý của cô.
 - Artifacts được loại khỏi Git mặc định; chỉ chọn số liệu/hình cần nộp sau khi kiểm tra. AI skills tiếp tục được loại theo .gitignore.
+
+## Lần train GPU đã hoàn thành
+
+[Notebook kết quả trên Drive](https://colab.research.google.com/drive/1WiCTnJhuDdR6ovY-NCgWCHWbYDRqWdjH): MLP/CNN đã train 5 epoch trên T4. Accuracy validation tại best checkpoint: 88,58% / 91,32%; chưa test. Xem PROJECT_STATUS để truy commit, run và vị trí ZIP chưa xác nhận tải về máy.
