@@ -39,3 +39,6 @@ AGENTS.md
 *.zip
 *.rar
 *.7z
+
+# Stage 3 run outputs: select report artifacts explicitly after review
+/03_Thuc_Nghiem_Cai_Tien/artifacts/

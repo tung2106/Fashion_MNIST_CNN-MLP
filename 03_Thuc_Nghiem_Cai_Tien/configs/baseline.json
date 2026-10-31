@@ -1,0 +1,8 @@
+{
+  "profile": "baseline",
+  "seed": 42,
+  "batch_size": 128,
+  "epochs": 5,
+  "lr": 0.001,
+  "models": ["MLP", "CNN"]
+}

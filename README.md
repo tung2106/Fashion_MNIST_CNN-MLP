@@ -1,6 +1,6 @@
 # Phân loại trang phục — bản đồ dự án
 
-Cập nhật tổ chức thư mục: 29/10/2026. Bắt đầu bằng tài liệu này khi mở dự án trong VS Code.
+Cập nhật tổ chức thư mục: 31/10/2026. Bắt đầu bằng tài liệu này khi mở dự án trong VS Code.
 
 ## Tìm đúng nơi làm việc
 
@@ -9,14 +9,14 @@ Cập nhật tổ chức thư mục: 29/10/2026. Bắt đầu bằng tài liệu
 | [TAI_LIEU](TAI_LIEU/README.md) | Hai file đặc tả/kỹ năng, kế hoạch 14 ngày và phân công 5 người, báo cáo tham khảo, hướng dẫn Colab, báo cáo nhóm | Đã tập hợp tài liệu hiện có |
 | [01_Lam_Quen_Du_Lieu](01_Lam_Quen_Du_Lieu/README.md) | Bài học đọc ảnh, pixel, nhãn, đếm số ảnh | Có mã thực hành |
 | [02_Colab_Co_Ban](02_Colab_Co_Ban/README.md) | Notebook MLP/CNN cơ bản, mã nguồn, kết quả train/test, checkpoint và biểu đồ | Đã có một lần chạy thực tế |
-| [03_Thuc_Nghiem_Cai_Tien](03_Thuc_Nghiem_Cai_Tien/README.md) | Mã và kết quả thí nghiệm có kiểm soát, cải tiến mô hình, phân tích đặc trưng | Chưa triển khai |
+| [03_Thuc_Nghiem_Cai_Tien](03_Thuc_Nghiem_Cai_Tien/README.md) | Mã MLP/CNN tách module, lệnh inspect/smoke/train, kiểm tra và hướng dẫn | Đã có nền tảng; chưa chạy thí nghiệm cải tiến |
 | [04_Demo_Truc_Quan](04_Demo_Truc_Quan/README.md) | Giao diện demo dự đoán và giải thích kết quả | Chưa triển khai ứng dụng riêng |
 | [05_Bao_Cao_Va_Ban_Giao](05_Bao_Cao_Va_Ban_Giao/README.md) | Công cụ kiểm tra, đóng gói và bản bàn giao cuối | Chưa triển khai |
 | [DU_LIEU](DU_LIEU/README.md) | Dữ liệu Fashion-MNIST gốc dùng chung trên máy | Đã có ảnh và nhãn train/test |
 | [RAC](RAC/README.md) | Gói hướng dẫn cũ và tệp tạm trích xuất báo cáo | Giữ lại để có thể khôi phục |
 | `.vscode` | Cấu hình trình soạn thảo | Giữ tại gốc để VS Code nhận diện |
 
-Tài liệu nội dung được tập trung trong `TAI_LIEU`; README tại từng giai đoạn chỉ là bản chỉ đường và danh sách việc của giai đoạn đó. Các thư mục giai đoạn 03–05 hiện có hướng dẫn, chưa có mã/kết quả hoàn thành.
+Tài liệu nội dung được tập trung trong `TAI_LIEU`; README tại từng giai đoạn chỉ là bản chỉ đường và danh sách việc của giai đoạn đó. Giai đoạn 03 đã có mã nền tảng và kiểm tra nhỏ; giai đoạn 04–05 chưa có ứng dụng hoàn thành.
 
 ## Thứ tự học và thực hiện
 
@@ -47,3 +47,7 @@ Lần chạy `20261029_092231_60aa1b` ở giai đoạn 02: 5 epoch mỗi mô hì
 
 Không xóa tệp gốc trong lần sắp xếp này. [Nhật ký chuyển tệp](TAI_LIEU/NHAT_KY_SAP_XEP.json) lưu đường dẫn cũ/mới và mã SHA256 trước chỉnh sửa để đối chiếu.
 
+
+## Bắt đầu mã giai đoạn 3
+
+Đọc [cấu trúc và lệnh chạy](03_Thuc_Nghiem_Cai_Tien/README.md), rồi [giải thích từng phần](TAI_LIEU/05_Huong_Dan_Giai_Doan_3/HUONG_DAN_DOC_CODE.md). Bước đầu là `--inspect`, chỉ xem dữ liệu, không train.

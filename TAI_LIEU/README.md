@@ -9,3 +9,8 @@
 | `NHAT_KY_SAP_XEP.json` | Danh sách di chuyển và dấu vân tay các tệp trước khi tổ chức lại |
 
 Tài liệu nhóm trước là nguồn tham khảo, không phải kết quả nhóm mình. Mã, notebook và đầu ra thí nghiệm nằm trong các giai đoạn ở [thư mục gốc](../README.md).
+
+## Hướng dẫn mã giai đoạn 3
+
+- [Giải thích từng phần Python/PyTorch](05_Huong_Dan_Giai_Doan_3/HUONG_DAN_DOC_CODE.md)
+- [Trạng thái và bằng chứng kiểm tra](05_Huong_Dan_Giai_Doan_3/PROJECT_STATUS.md)
