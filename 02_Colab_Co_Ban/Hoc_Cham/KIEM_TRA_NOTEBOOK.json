@@ -1,0 +1,23 @@
+{
+  "syntax_cells_pass": 33,
+  "runtime_smoke": {
+    "MLP": {
+      "train_updates_weights": true,
+      "eval_preserves_weights": true,
+      "shape": [
+        64,
+        10
+      ]
+    },
+    "CNN": {
+      "train_updates_weights": true,
+      "eval_preserves_weights": true,
+      "shape": [
+        64,
+        10
+      ]
+    }
+  },
+  "scope": "128 real train samples, unnormalized beyond ToTensor; technical check only, NOT full training or test evaluation",
+  "not_run": "Full 5-epoch training, sklearn split, plots, pandas exports and Colab download are not executed by this local smoke test."
+}

@@ -1,5 +1,7 @@
 # Giai đoạn 02 — Thực hành Colab cơ bản
 
+**Dành cho người mới học Python:** mở [notebook học chậm mới trên Colab](https://colab.research.google.com/drive/1a0PONFuaDTd-3QD9saWxFUYarCQinwyo), gồm 33 bước nhỏ có giải thích từng dòng. Xem [hướng dẫn bản học chậm](Hoc_Cham/README.md). Bản mới độc lập, không thay notebook và kết quả đã chạy bên dưới.
+
 **Đã chạy:** MLP và CNN, 5 epoch/mô hình, một seed. Chưa có chuỗi thí nghiệm cải tiến của đồ án đầy đủ.
 
 | Tệp/thư mục | Vai trò |
