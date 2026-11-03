@@ -1,6 +1,6 @@
 # Giai đoạn 02 — Thực hành Colab cơ bản
 
-**Dành cho người mới học Python:** mở [notebook học chậm mới trên Colab](https://colab.research.google.com/drive/1a0PONFuaDTd-3QD9saWxFUYarCQinwyo), gồm 33 bước nhỏ có giải thích từng dòng. Xem [hướng dẫn bản học chậm](Hoc_Cham/README.md). Bản mới độc lập, không thay notebook và kết quả đã chạy bên dưới.
+Bắt đầu ở [notebook học chậm trên Colab](https://colab.research.google.com/github/tung2106/Fashion_MNIST_CNN-MLP/blob/main/02_Colab_Co_Ban/Hoc_Cham/Fashion_MNIST_Hoc_Cham_Giai_Thich_Tung_Dong.ipynb). Mỗi mục có một câu dẫn, một ô mã và một câu tự kiểm tra. [Notebook thực hành tổng hợp](https://colab.research.google.com/github/tung2106/Fashion_MNIST_CNN-MLP/blob/main/02_Colab_Co_Ban/Fashion_MNIST_Hoc_Tung_Buoc.ipynb).
 
 **Đã chạy:** MLP và CNN, 5 epoch/mô hình, một seed. Chưa có chuỗi thí nghiệm cải tiến của đồ án đầy đủ.
 

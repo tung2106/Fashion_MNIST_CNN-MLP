@@ -1,10 +1,10 @@
 # Notebook học chậm — bản riêng
 
-[Mở notebook mới trên Colab](https://colab.research.google.com/drive/1a0PONFuaDTd-3QD9saWxFUYarCQinwyo).
+[Mở bản gọn trên Colab](https://colab.research.google.com/github/tung2106/Fashion_MNIST_CNN-MLP/blob/main/02_Colab_Co_Ban/Hoc_Cham/Fashion_MNIST_Hoc_Cham_Giai_Thich_Tung_Dong.ipynb).
 
-Đã nhập và xác nhận lưu trên Google Drive ngày 30/10/2026. Notebook gốc và kết quả cũ không bị sửa.
+[Bản học chi tiết lưu trên Drive ngày 30/10/2026](https://colab.research.google.com/drive/1a0PONFuaDTd-3QD9saWxFUYarCQinwyo).
 
-- `Fashion_MNIST_Hoc_Cham_Giai_Thich_Tung_Dong.ipynb`: 33 bước, 101 ô gồm giải thích, code có chú thích từng dòng và câu hỏi kiểm tra.
+- `Fashion_MNIST_Hoc_Cham_Giai_Thich_Tung_Dong.ipynb`: 33 bước, 101 ô gồm giải thích, mỗi ô tập trung vào một thao tác và câu hỏi kiểm tra.
 - `build_hoc_cham.py`: tạo lại bản học chậm cục bộ; không sửa bản Colab hoặc notebook gốc.
 - `verify_hoc_cham.py`: kiểm tra kỹ thuật với 128 ảnh train thật, không phải số liệu đánh giá đề tài.
 - `KIEM_TRA_NOTEBOOK.json`: phạm vi và kết quả kiểm tra.

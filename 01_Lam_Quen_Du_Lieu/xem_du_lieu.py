@@ -7,10 +7,7 @@ DATA_ROOT = Path(__file__).resolve().parents[1] / "DU_LIEU"
 
 # Tải dữ liệu và chuyển ảnh thành tensor — một cấu trúc chứa số.
 dataset = datasets.FashionMNIST(
-    root=DATA_ROOT,
-    train=True,
-    download=True,
-    transform=transforms.ToTensor()
+    root=DATA_ROOT, train=True, download=True, transform=transforms.ToTensor()
 )
 
 # Lấy một ảnh và đáp án tương ứng.
@@ -38,4 +35,3 @@ plt.imshow(image[0], cmap="gray")
 plt.title(dataset.classes[label])
 plt.axis("off")
 plt.show()
-

@@ -1,5 +1,7 @@
 """Giữ nguyên kiến trúc MLP/CNN từ notebook giai đoạn 2."""
+
 from torch import nn
+
 
 class MLP(nn.Module):
     def __init__(self):
@@ -10,8 +12,10 @@ class MLP(nn.Module):
             nn.ReLU(),  # Thêm tính phi tuyến.
             nn.Linear(128, 10),  # [B,128] -> [B,10] logits.
         )
+
     def forward(self, x):
         return self.layers(x)
+
 
 class CNN(nn.Module):
     def __init__(self):
@@ -26,11 +30,13 @@ class CNN(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),  # [B,32*7*7] = [B,1568].
-            nn.Linear(32*7*7, 128),  # Tổng hợp đặc trưng.
+            nn.Linear(32 * 7 * 7, 128),  # Tổng hợp đặc trưng.
             nn.ReLU(),
             nn.Linear(128, 10),  # Điểm số 10 lớp.
         )
+
     def forward(self, x):
         return self.classifier(self.features(x))
 
-MODEL_CLASSES = {'MLP': MLP, 'CNN': CNN}
+
+MODEL_CLASSES = {"MLP": MLP, "CNN": CNN}
