@@ -1,0 +1,86 @@
+{
+  "checkpoint_sha256": "8b835f79034215d26c0c3a181c6ef941d3f774383e8c61395918baff5130846b",
+  "split": "test",
+  "samples": [
+    {
+      "sample_id": 19,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "sample_id": 1,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "sample_id": 6,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "sample_id": 4,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "sample_id": 2914,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "sample_id": 3531,
+      "layers": [
+        2,
+        12
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "color_scale": "independent per channel",
+  "causal_interpretation": false
+}

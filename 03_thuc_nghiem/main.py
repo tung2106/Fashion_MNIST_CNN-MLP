@@ -14,6 +14,7 @@ from src.engine import fit
 from src.evaluate import evaluate_models
 from src.plots import plot_samples, plot_history
 from src.utils import save_json
+from src.models import MODEL_CLASSES
 
 STAGE = Path(__file__).resolve().parent  # Không phụ thuộc terminal mở từ thư mục nào.
 
@@ -41,9 +42,9 @@ def main():
     if config["epochs"] < 1 or config["batch_size"] < 1 or config["lr"] <= 0:
         parser.error("epochs, batch_size, lr phải dương")
     if not config["models"] or any(
-        name not in ("MLP", "CNN") for name in config["models"]
+        name not in MODEL_CLASSES for name in config["models"]
     ):
-        parser.error("models phải chứa MLP và/hoặc CNN")
+        parser.error(f"models phải thuộc {list(MODEL_CLASSES)}")
     if args.evaluate_test and (config["profile"] == "smoke" or args.inspect):
         parser.error("Không test trong chế độ smoke/inspect.")
     # Giới hạn thread để smoke nhỏ không bị chậm vì CPU tạo quá nhiều luồng.

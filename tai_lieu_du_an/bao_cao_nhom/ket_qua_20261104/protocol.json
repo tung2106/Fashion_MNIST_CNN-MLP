@@ -1,0 +1,66 @@
+{
+  "config": {
+    "profile": "baseline",
+    "seed": 42,
+    "split_seed": 42,
+    "batch_size": 128,
+    "epochs": 30,
+    "lr": 0.001,
+    "patience": 6,
+    "min_delta": 0.0001,
+    "scheduler": true,
+    "num_workers": 2,
+    "pin_memory": true,
+    "models": [
+      "MLP",
+      "CNN",
+      "CNNPlus"
+    ]
+  },
+  "candidates": [
+    [
+      "mlp",
+      "MLP",
+      false
+    ],
+    [
+      "cnn",
+      "CNN",
+      false
+    ],
+    [
+      "cnn_dropout",
+      "CNNDropout",
+      false
+    ],
+    [
+      "cnn_batchnorm",
+      "CNNBatchNorm",
+      false
+    ],
+    [
+      "cnn_aug",
+      "CNN",
+      true
+    ],
+    [
+      "cnn_plus",
+      "CNNPlus",
+      false
+    ],
+    [
+      "cnn_plus_aug",
+      "CNNPlus",
+      true
+    ]
+  ],
+  "checkpoint_selection": "minimum validation loss",
+  "config_selection": "maximum validation macro F1; tie lower validation loss",
+  "confirm_seeds": [
+    42,
+    123,
+    2026
+  ],
+  "demo_seed": 42,
+  "test_note": "Test đã được xem ở giai đoạn 2; không phải holdout chưa từng biết."
+}

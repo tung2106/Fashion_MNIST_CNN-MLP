@@ -19,6 +19,7 @@ __pycache__/
 /tai_lieu_du_an/ke_hoach_noi_bo/
 SKILL.md
 AGENTS.md
+/codex.md
 
 # Shared raw data stays local; retain the explanatory README
 /du_lieu_chung/*

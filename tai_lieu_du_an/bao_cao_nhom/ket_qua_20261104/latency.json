@@ -1,0 +1,9 @@
+{
+  "device": "cuda",
+  "batch_size": 1,
+  "warmup": 10,
+  "measured": 100,
+  "median_ms": 0.5757835006079404,
+  "p95_ms": 0.6658971996330365,
+  "includes_preprocessing": false
+}

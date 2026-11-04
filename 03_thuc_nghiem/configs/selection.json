@@ -1,0 +1,14 @@
+{
+  "profile": "baseline",
+  "seed": 42,
+  "split_seed": 42,
+  "batch_size": 128,
+  "epochs": 30,
+  "lr": 0.001,
+  "patience": 6,
+  "min_delta": 0.0001,
+  "scheduler": true,
+  "num_workers": 2,
+  "pin_memory": true,
+  "models": ["MLP", "CNN", "CNNPlus"]
+}

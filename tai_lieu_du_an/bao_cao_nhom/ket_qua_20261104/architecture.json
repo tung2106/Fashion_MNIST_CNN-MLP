@@ -1,0 +1,201 @@
+[
+  {
+    "layer": "features.0",
+    "type": "Conv2d",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 288
+  },
+  {
+    "layer": "features.1",
+    "type": "BatchNorm2d",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 64
+  },
+  {
+    "layer": "features.2",
+    "type": "ReLU",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "features.3",
+    "type": "Conv2d",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 9216
+  },
+  {
+    "layer": "features.4",
+    "type": "BatchNorm2d",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 64
+  },
+  {
+    "layer": "features.5",
+    "type": "ReLU",
+    "shape": [
+      1,
+      32,
+      28,
+      28
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "features.6",
+    "type": "MaxPool2d",
+    "shape": [
+      1,
+      32,
+      14,
+      14
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "features.7",
+    "type": "Conv2d",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 18432
+  },
+  {
+    "layer": "features.8",
+    "type": "BatchNorm2d",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 128
+  },
+  {
+    "layer": "features.9",
+    "type": "ReLU",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "features.10",
+    "type": "Conv2d",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 36864
+  },
+  {
+    "layer": "features.11",
+    "type": "BatchNorm2d",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 128
+  },
+  {
+    "layer": "features.12",
+    "type": "ReLU",
+    "shape": [
+      1,
+      64,
+      14,
+      14
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "features.13",
+    "type": "MaxPool2d",
+    "shape": [
+      1,
+      64,
+      7,
+      7
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "classifier.0",
+    "type": "Flatten",
+    "shape": [
+      1,
+      3136
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "classifier.1",
+    "type": "Linear",
+    "shape": [
+      1,
+      128
+    ],
+    "parameters": 401536
+  },
+  {
+    "layer": "classifier.2",
+    "type": "ReLU",
+    "shape": [
+      1,
+      128
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "classifier.3",
+    "type": "Dropout",
+    "shape": [
+      1,
+      128
+    ],
+    "parameters": 0
+  },
+  {
+    "layer": "classifier.4",
+    "type": "Linear",
+    "shape": [
+      1,
+      10
+    ],
+    "parameters": 1290
+  }
+]

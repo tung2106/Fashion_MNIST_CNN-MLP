@@ -1,0 +1,11 @@
+true_label,predicted_label,count
+Shirt,T-shirt/top,94
+T-shirt/top,Shirt,70
+Shirt,Coat,59
+Shirt,Pullover,43
+Coat,Shirt,35
+Ankle boot,Sneaker,34
+Coat,Pullover,33
+Pullover,Shirt,30
+Shirt,Dress,25
+Dress,Coat,25

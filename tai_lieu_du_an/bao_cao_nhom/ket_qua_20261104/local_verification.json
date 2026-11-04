@@ -1,0 +1,46 @@
+{
+  "device": "cpu",
+  "training": false,
+  "checkpoint_sha256": "8b835f79034215d26c0c3a181c6ef941d3f774383e8c61395918baff5130846b",
+  "test_tables_checked": 5,
+  "all_metrics_hashes_match": true,
+  "samples": [
+    {
+      "sample_id": 19,
+      "true_label": 0,
+      "predicted_label": 0,
+      "top_score": 0.9979409575462341
+    },
+    {
+      "sample_id": 1,
+      "true_label": 2,
+      "predicted_label": 2,
+      "top_score": 0.9999963045120239
+    },
+    {
+      "sample_id": 6,
+      "true_label": 4,
+      "predicted_label": 4,
+      "top_score": 0.993860125541687
+    },
+    {
+      "sample_id": 4,
+      "true_label": 6,
+      "predicted_label": 6,
+      "top_score": 0.9665730595588684
+    },
+    {
+      "sample_id": 2914,
+      "true_label": 7,
+      "predicted_label": 9,
+      "top_score": 0.999954104423523
+    },
+    {
+      "sample_id": 3531,
+      "true_label": 0,
+      "predicted_label": 3,
+      "top_score": 0.9999387264251709
+    }
+  ],
+  "inference_matches_colab": true
+}

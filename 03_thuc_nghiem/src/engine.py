@@ -41,7 +41,15 @@ def fit(name, data, config, device, run):
     optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"])
     loader = make_loader(data["train"], config, training=True)
     validation = make_loader(data["validation"], config)
+    scheduler = (
+        torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer, patience=2, factor=0.5, min_lr=1e-5
+        )
+        if config.get("scheduler", False)
+        else None
+    )
     best_loss, best_epoch, history = float("inf"), 0, []
+    stop_reference, stale = float("inf"), 0
     started = time.perf_counter()
     for epoch in range(1, config["epochs"] + 1):
         train = run_epoch(model, loader, device, optimizer)
@@ -53,6 +61,7 @@ def fit(name, data, config, device, run):
                 val_loss=val["loss"],
                 train_accuracy=train["accuracy"],
                 val_accuracy=val["accuracy"],
+                lr=optimizer.param_groups[0]["lr"],
             )
         )
         payload = dict(
@@ -67,6 +76,12 @@ def fit(name, data, config, device, run):
         if val["loss"] < best_loss:  # Hòa thì giữ epoch sớm hơn.
             best_loss, best_epoch = val["loss"], epoch
             torch.save(payload, run / "checkpoints" / f"{name}_best.pt")
+        if val["loss"] < stop_reference - config.get("min_delta", 0.0):
+            stop_reference, stale = val["loss"], 0
+        else:
+            stale += 1
+        if scheduler:
+            scheduler.step(val["loss"])
         # Last phục vụ kiểm tra trạng thái cuối, chưa hỗ trợ resume chính xác.
         torch.save(
             {**payload, "optimizer": optimizer.state_dict()},
@@ -81,11 +96,17 @@ def fit(name, data, config, device, run):
             f"val_loss={val['loss']:.4f} val_acc={val['accuracy']:.4f}",
             flush=True,
         )
+        if config.get("patience") and stale >= config["patience"]:
+            print(
+                f"Early stopping at epoch {epoch}; best epoch {best_epoch}", flush=True
+            )
+            break
     info = dict(
         best_epoch=best_epoch,
         best_val_loss=best_loss,
         train_seconds=time.perf_counter() - started,
         parameters=sum(p.numel() for p in model.parameters()),
+        epochs_run=len(history),
     )
     save_json(run / "metrics" / f"{name}_training.json", info)
     return info

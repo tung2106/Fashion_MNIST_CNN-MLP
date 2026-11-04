@@ -1,6 +1,24 @@
 # Giai đoạn 3 — Chương trình MLP/CNN có cấu trúc
 
-Đã triển khai phần nền tảng, tách mã notebook thành các module. Chưa hoàn thành toàn bộ thí nghiệm cải tiến. Giữ nguyên notebook, kết quả và phiên Colab giai đoạn 2.
+Đã tách mã notebook thành các module và giữ mốc 5 epoch. Lượt cải tiến 04/11/2026 đã hoàn thành trên Colab T4: 7 cấu hình, thêm 2 seed cho cấu hình được chọn, kiểm chứng và đánh giá test.
+
+Accuracy test MLP **88,55%**, CNN cơ bản **92,11%**, CNNPlus + augmentation **93,70%**. Cấu hình được chọn bằng validation; demo giữ seed 42. Trung bình test qua 3 seed: **93,80%**, độ lệch chuẩn mẫu **0,091 điểm phần trăm**. ZIP đã tải, xác minh và giải nén vào `artifacts/selection_20261104_144952_e58647/`; inference local khớp Colab. Xem [báo cáo đánh giá](../tai_lieu_du_an/bao_cao_nhom/ket_qua_20261104/danh_gia_chuan_bi_demo.md) và [tiến độ](../tai_lieu_du_an/huong_dan_thuc_nghiem/tien_do_giai_doan_03.md).
+
+## Lượt lựa chọn mô hình cho demo
+
+[Mở Colab](https://colab.research.google.com/drive/1K9FNgM9mzUL55AmOaVcc_vIfLd5DKkP0) · [Notebook local](notebooks/03_chon_mo_hinh_demo.ipynb) · [Giao thức và lý do](../tai_lieu_du_an/huong_dan_thuc_nghiem/giao_thuc_chon_mo_hinh.md)
+
+`select_model.py` so sánh 7 cấu hình trên validation, chạy cấu hình thắng với thêm 2 seed, chốt checkpoint rồi mới test. `analyze_selection.py` phân tích đặc trưng/lỗi và kiểm tra số liệu. `verify_selection.py` kiểm tra kỹ thuật trên Colab GPU. `src/inference.py` là phần nạp mô hình dùng chung cho demo.
+
+Tạo gói mã trên máy (lệnh này không train):
+
+```powershell
+.\.venv\Scripts\python.exe .\03_thuc_nghiem\scripts\pack_source.py
+```
+
+Upload `03_thuc_nghiem/artifacts/source.zip` qua Files → Upload to session storage trong Colab, chọn T4 rồi chạy notebook 03. Không chạy lại ô train chỉ để xem kết quả đã có. ZIP kết quả lưu tại `artifacts/selection_<thời_gian>_<id>.zip`; mỗi run có source, protocol, bảng validation/test, checkpoint và `demo_bundle/`.
+
+Phần bên dưới mô tả nền tảng và mốc lịch sử 5 epoch; giao thức lượt mới được ghi riêng tại liên kết trên.
 
 ## Cấu trúc
 

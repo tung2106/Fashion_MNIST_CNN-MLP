@@ -1,4 +1,21 @@
-# Trạng thái giai đoạn 3 — 31/10/2026
+# Trạng thái giai đoạn 3
+
+## Cập nhật 04/11/2026 — đã train và đánh giá trên Colab
+
+- Colab T4: https://colab.research.google.com/drive/1K9FNgM9mzUL55AmOaVcc_vIfLd5DKkP0.
+- Đã triển khai 7 cấu hình, early stopping, giảm learning rate, chọn cấu hình bằng validation và chạy thêm 2 seed cho cấu hình thắng.
+- Run chính `selection_20261104_144952_e58647`: đã hoàn thành 9 lượt train trên Tesla T4. Cấu hình được chọn bằng validation: CNNPlus + augmentation, seed 42, checkpoint epoch 30, 468.010 tham số.
+- Accuracy validation 94,33%, macro-F1 validation 94,30%. Accuracy test MLP 88,55%, CNN cơ bản 92,11%, bản demo 93,70%. Ba seed của cấu hình được chọn: 93,70% / 93,84% / 93,87%; trung bình 93,80%, độ lệch chuẩn mẫu 0,091 điểm phần trăm.
+- Kiểm tra kỹ thuật trên Colab PASS: split, shape, train/eval, early stopping, scheduler và checkpoint reload. Phân tích đã hoàn tất; kiểm tra số liệu và inference từng ảnh khớp đánh giá PASS.
+- Kiểm tra cú pháp/Ruff trên các file mới PASS; không thực hiện train hoặc test có optimizer trên máy cá nhân.
+- Skill `scikit-learn` đã cài ngoài repository. `codex.md` ghi yêu cầu giảng viên và hướng phát triển; `AGENTS.md` yêu cầu các phiên sau đọc file đó. Cả hai là file local, được Git bỏ qua.
+- Lượt khởi động thử trước đó bị dừng để bổ sung đủ đối chứng; không dùng kết quả dở làm số liệu cuối. Lượt chính có log từng epoch và source snapshot.
+- ZIP đã được người dùng tải vào `03_thuc_nghiem/artifacts/selection_20261104_144952_e58647.zip`, 45.321.073 byte. SHA256 `0eeb6ec013f881a77bef3ef6019e9fcdf25ff1c458074c25ca0f195bc264b90c` khớp Colab, CRC PASS; đã giải nén 172 tệp vào thư mục cùng tên. Có `DOWNLOAD_VERIFIED.json`.
+- Inference CPU trên 6 ảnh (4 đúng, 2 sai) khớp Colab trong dung sai; CLI chạy thành công. Đã tính lại accuracy/macro-F1, kiểm tra ma trận/support/hash cho cả 5 bảng test. Có `LOCAL_INFERENCE_VERIFIED.json`; không train trên máy cá nhân.
+- [Báo cáo chuẩn bị demo](../bao_cao_nhom/ket_qua_20261104/danh_gia_chuan_bi_demo.md) đã bổ sung bảng, hình, phân tích đặc trưng/lỗi và đối chiếu yêu cầu. Đủ checkpoint để bắt đầu demo Fashion-MNIST; chưa có giao diện hoàn chỉnh. Bản cập nhật Git gồm mã, notebook, tài liệu và hình/bảng đã kiểm chứng; ZIP, trọng số và hướng dẫn AI giữ local.
+- Bản được chọn chạm ngân sách 30 epoch; không tuyên bố tối ưu tuyệt đối. Test đã được xem từ giai đoạn 2; không dùng test để tiếp tục chọn cấu hình.
+
+Các mục ngày 31/10 bên dưới là lịch sử, không thay thế giao thức mới tại `giao_thuc_chon_mo_hinh.md`.
 
 ## Đã thực hiện
 

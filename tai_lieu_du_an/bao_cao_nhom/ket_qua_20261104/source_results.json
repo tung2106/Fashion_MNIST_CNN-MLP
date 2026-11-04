@@ -1,0 +1,8 @@
+{
+  "run_id": "selection_20261104_144952_e58647",
+  "model": "CNNPlus",
+  "checkpoint_sha256": "8b835f79034215d26c0c3a181c6ef941d3f774383e8c61395918baff5130846b",
+  "all_9_splits_match": true,
+  "matches_old_split": true,
+  "all_test_tables_match_predictions": true
+}

@@ -1,4 +1,4 @@
-"""Giữ nguyên kiến trúc MLP/CNN từ notebook giai đoạn 2."""
+"""MLP/CNN gốc và các biến thể để so sánh có kiểm soát."""
 
 from torch import nn
 
@@ -39,4 +39,63 @@ class CNN(nn.Module):
         return self.classifier(self.features(x))
 
 
-MODEL_CLASSES = {"MLP": MLP, "CNN": CNN}
+class CNNPlus(nn.Module):
+    """Hai khối tích chập, kết hợp BatchNorm và Dropout."""
+
+    def __init__(self):
+        super().__init__()
+        layers = []
+        for incoming, outgoing in [(1, 32), (32, 64)]:
+            layers.extend(
+                [
+                    nn.Conv2d(incoming, outgoing, 3, padding=1, bias=False),
+                    nn.BatchNorm2d(outgoing),
+                    nn.ReLU(),
+                    nn.Conv2d(outgoing, outgoing, 3, padding=1, bias=False),
+                    nn.BatchNorm2d(outgoing),
+                    nn.ReLU(),
+                    nn.MaxPool2d(2),
+                ]
+            )
+        self.features = nn.Sequential(*layers)
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(64 * 7 * 7, 128),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(128, 10),
+        )
+
+    def forward(self, x):
+        return self.classifier(self.features(x))
+
+
+class CNNDropout(CNN):
+    """Giữ CNN gốc, chỉ thêm Dropout để đo riêng tác động."""
+
+    def __init__(self):
+        super().__init__()
+        layers = list(self.classifier.children())
+        self.classifier = nn.Sequential(*layers[:-1], nn.Dropout(0.3), layers[-1])
+
+
+class CNNBatchNorm(CNN):
+    """Giữ CNN gốc, chỉ thêm BatchNorm sau hai convolution."""
+
+    def __init__(self):
+        super().__init__()
+        layers = []
+        for layer in self.features:
+            layers.append(layer)
+            if isinstance(layer, nn.Conv2d):
+                layers.append(nn.BatchNorm2d(layer.out_channels))
+        self.features = nn.Sequential(*layers)
+
+
+MODEL_CLASSES = {
+    "MLP": MLP,
+    "CNN": CNN,
+    "CNNPlus": CNNPlus,
+    "CNNDropout": CNNDropout,
+    "CNNBatchNorm": CNNBatchNorm,
+}

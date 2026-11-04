@@ -23,7 +23,9 @@ def split_indices(labels, seed):
 
 def prepare_data(root, config, run):
     raw = datasets.FashionMNIST(root, train=True, download=True)
-    train_ids, val_ids = split_indices(raw.targets, config["seed"])
+    train_ids, val_ids = split_indices(
+        raw.targets, config.get("split_seed", config["seed"])
+    )
     # Smoke dùng ít ảnh mỗi lớp, giữ nguyên split gốc để không lẫn train/val.
     if config["profile"] == "smoke":
 
@@ -41,8 +43,22 @@ def prepare_data(root, config, run):
         [transforms.ToTensor(), transforms.Normalize((mean,), (std,))]
     )
     source = datasets.FashionMNIST(root, train=True, transform=transform)
+    train_source = source
+    if config.get("augment", False):
+        train_source = datasets.FashionMNIST(
+            root,
+            train=True,
+            transform=transforms.Compose(
+                [
+                    transforms.RandomCrop(28, padding=2),
+                    transforms.RandomHorizontalFlip(),
+                    transforms.ToTensor(),
+                    transforms.Normalize((mean,), (std,)),
+                ]
+            ),
+        )
     data = {
-        "train": Subset(source, train_ids.tolist()),
+        "train": Subset(train_source, train_ids.tolist()),
         "validation": Subset(source, val_ids.tolist()),
         "mean": mean,
         "std": std,
@@ -75,7 +91,8 @@ def make_loader(dataset, config, training=False):
         batch_size=config["batch_size"],
         shuffle=training,
         generator=torch.Generator().manual_seed(config["seed"]),
-        num_workers=0,
+        num_workers=config.get("num_workers", 0),
+        pin_memory=config.get("pin_memory", False),
     )
 
 
