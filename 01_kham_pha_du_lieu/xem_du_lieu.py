@@ -34,8 +34,4 @@ for class_id, class_name in enumerate(dataset.classes):
 plt.imshow(image[0], cmap="gray")
 plt.title(dataset.classes[label])
 plt.axis("off")
-# Lưu trước khi show để vẫn xem được khi môi trường không mở cửa sổ ảnh.
-output_path = Path(__file__).resolve().parent / "anh_dang_xem.png"
-plt.savefig(output_path, dpi=150, bbox_inches="tight")
-print("Đã lưu ảnh tại:", output_path)
 plt.show()
