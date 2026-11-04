@@ -5,6 +5,7 @@ __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 .pytest_cache/
+.ruff_cache/
 
 # Local editor settings and credentials
 .vscode/
@@ -15,21 +16,20 @@ __pycache__/
 !.env.example
 
 # Private AI instructions, prompts, and implementation skills
-/TAI_LIEU/01_Dac_Ta_Va_Ke_Hoach/
+/tai_lieu_du_an/ke_hoach_noi_bo/
 SKILL.md
 AGENTS.md
 
 # Shared raw data stays local; retain the explanatory README
-/DU_LIEU/*
-!/DU_LIEU/README.md
+/du_lieu_chung/*
+!/du_lieu_chung/README.md
 
 # Old files and temporary review material stay local
-/RAC/*
+/luu_tru/
 
 # Prior group's report and machine-specific reorganization records
-/TAI_LIEU/02_Tham_Khao/*.docx
-/TAI_LIEU/NHAT_KY_SAP_XEP.json
-/TAI_LIEU/KIEM_TRA_SAP_XEP.json
+/tai_lieu_du_an/tham_khao/*.docx
+/tai_lieu_du_an/lich_su/
 
 # Model weights and compressed delivery archives
 *.pt
@@ -41,4 +41,4 @@ AGENTS.md
 *.7z
 
 # Stage 3 run outputs: select report artifacts explicitly after review
-/03_Thuc_Nghiem_Cai_Tien/artifacts/
+/03_thuc_nghiem/artifacts/

@@ -1,53 +1,17 @@
-# Phân loại trang phục — bản đồ dự án
+# Phân loại trang phục bằng CNN và MLP
 
-Cập nhật tổ chức thư mục: 31/10/2026. Bắt đầu bằng tài liệu này khi mở dự án trong VS Code.
+Dự án dùng Fashion-MNIST để so sánh cách MLP và CNN phân loại cùng một ảnh thành 10 loại trang phục. Nếu mới học, mở [notebook 01 trên Colab](https://colab.research.google.com/drive/1hvzAjJsUWkK7WS5SVVZ1j1Bh1Ng7uTTS) hoặc [bản trong dự án](02_thuc_hanh_colab/notebooks/01_hoc_tung_buoc.ipynb).
 
-## Tìm đúng nơi làm việc
-
-| Thư mục | Chứa gì / dùng để làm gì | Trạng thái |
+| Giai đoạn | Mở tại đây | Nội dung |
 |---|---|---|
-| [TAI_LIEU](TAI_LIEU/README.md) | Hai file đặc tả/kỹ năng, kế hoạch 14 ngày và phân công 5 người, báo cáo tham khảo, hướng dẫn Colab, báo cáo nhóm | Đã tập hợp tài liệu hiện có |
-| [01_Lam_Quen_Du_Lieu](01_Lam_Quen_Du_Lieu/README.md) | Bài học đọc ảnh, pixel, nhãn, đếm số ảnh | Có mã thực hành |
-| [02_Colab_Co_Ban](02_Colab_Co_Ban/README.md) | Notebook MLP/CNN cơ bản, mã nguồn, kết quả train/test, checkpoint và biểu đồ | Đã có một lần chạy thực tế |
-| [03_Thuc_Nghiem_Cai_Tien](03_Thuc_Nghiem_Cai_Tien/README.md) | Mã MLP/CNN tách module, lệnh inspect/smoke/train, kiểm tra và hướng dẫn | Đã có nền tảng; chưa chạy thí nghiệm cải tiến |
-| [04_Demo_Truc_Quan](04_Demo_Truc_Quan/README.md) | Giao diện demo dự đoán và giải thích kết quả | Chưa triển khai ứng dụng riêng |
-| [05_Bao_Cao_Va_Ban_Giao](05_Bao_Cao_Va_Ban_Giao/README.md) | Công cụ kiểm tra, đóng gói và bản bàn giao cuối | Chưa triển khai |
-| [DU_LIEU](DU_LIEU/README.md) | Dữ liệu Fashion-MNIST gốc dùng chung trên máy | Đã có ảnh và nhãn train/test |
-| [RAC](RAC/README.md) | Gói hướng dẫn cũ và tệp tạm trích xuất báo cáo | Giữ lại để có thể khôi phục |
-| `.vscode` | Cấu hình trình soạn thảo | Giữ tại gốc để VS Code nhận diện |
+| 01 · Khám phá dữ liệu | [xem_du_lieu.py](01_kham_pha_du_lieu/xem_du_lieu.py) | Xem ảnh 28×28, nhãn, pixel và số ảnh mỗi lớp. |
+| 02 · Thực hành Colab | [Hướng dẫn](02_thuc_hanh_colab/README.md) | Học theo từng ô; so sánh MLP và CNN. Đã train và test bộ mô hình cơ bản. |
+| 03 · Thực nghiệm | [Mã nguồn và lệnh chạy](03_thuc_nghiem/README.md) | Tách mã thành module. Đã có mốc 5 epoch trên Colab GPU; giai đoạn này mới đánh giá trên validation. |
+| 04 · Demo | [Kế hoạch demo](04_demo/README.md) | Dùng trọng số đã học để dự đoán một ảnh. Chưa có ứng dụng riêng. |
+| 05 · Bàn giao | [Danh mục bàn giao](05_ban_giao/README.md) | Chuẩn bị báo cáo, slide, hướng dẫn và gói nộp. Chưa có bản cuối. |
 
-Tài liệu nội dung được tập trung trong `TAI_LIEU`; README tại từng giai đoạn chỉ là bản chỉ đường và danh sách việc của giai đoạn đó. Giai đoạn 03 đã có mã nền tảng và kiểm tra nhỏ; giai đoạn 04–05 chưa có ứng dụng hoàn thành.
+**Nơi lưu chung:** [du_lieu_chung](du_lieu_chung/README.md) chứa ảnh và nhãn gốc; [tai_lieu_du_an](tai_lieu_du_an/README.md) chứa hướng dẫn, ảnh minh họa và tài liệu nhóm. `luu_tru/` giữ tệp cũ trên máy.
 
-## Thứ tự học và thực hiện
+**Đọc kết quả:** [bảng test giai đoạn 02](02_thuc_hanh_colab/artifacts/20261029_092231_60aa1b/metrics/summary.csv) ghi MLP 87,50%, CNN 90,27%. [Lần chạy GPU giai đoạn 03](https://colab.research.google.com/drive/1WiCTnJhuDdR6ovY-NCgWCHWbYDRqWdjH) ghi MLP 88,58%, CNN 91,32% trên **validation**; hai cặp số đo trên hai tập khác nhau.
 
-1. **Hiểu dữ liệu:** mở [xem_du_lieu.py](01_Lam_Quen_Du_Lieu/xem_du_lieu.py), xem một ảnh và nhãn. Đây là tệp `test.py` cũ đã đổi tên.
-2. **Hiểu vòng học:** mở [notebook cơ bản](02_Colab_Co_Ban/Fashion_MNIST_Hoc_Tung_Buoc.ipynb), đọc từng ô theo [hướng dẫn Colab](TAI_LIEU/03_Huong_Dan_Colab/HUONG_DAN_COLAB.md).
-3. **Thí nghiệm cải tiến:** theo [đặc tả và kế hoạch](TAI_LIEU/01_Dac_Ta_Va_Ke_Hoach/01_DAC_TA_VA_PROMPT.md) và [kỹ năng triển khai](TAI_LIEU/01_Dac_Ta_Va_Ke_Hoach/02_KY_NANG_TRIEN_KHAI.md). Lưu mã/kết quả mới vào giai đoạn 03, giữ riêng lần chạy cơ bản.
-4. **Làm demo:** dùng checkpoint đã được lựa chọn qua validation, tái sử dụng xử lý ảnh và mô hình của giai đoạn 03.
-5. **Viết và bàn giao:** bản báo cáo/slide của nhóm vào `TAI_LIEU/04_Bao_Cao_Nhom`; gói nộp cuối vào giai đoạn 05.
-
-Kế hoạch hai tuần và phân công nằm trong hai file đặc tả, vẫn là nguồn kế hoạch chính. Tên giai đoạn chỉ thể hiện trình tự và trách nhiệm lưu trữ; thành viên có thể chuẩn bị tài liệu/demo song song với thí nghiệm.
-
-## Kết quả đã có
-
-Lần chạy `20261029_092231_60aa1b` ở giai đoạn 02: 5 epoch mỗi mô hình, train/validation/test = **54.000/6.000/10.000 ảnh**, tổng **70.000 ảnh**. Accuracy test: MLP **87,50%**, CNN **90,27%**. Đây là thực hành cơ bản, chưa hoàn thành toàn bộ yêu cầu đồ án.
-
-- [Trạng thái và giới hạn kết quả](TAI_LIEU/03_Huong_Dan_Colab/TRANG_THAI_THUC_HIEN.md)
-- [Notebook đã chạy trên Colab](https://colab.research.google.com/drive/1himC9AFXIiUB5KNYW5PlEPnTs7OaOtvL)
-- [Bảng kết quả cục bộ](02_Colab_Co_Ban/ket_qua/20261029_092231_60aa1b/metrics/summary.csv)
-
-Đổi thư mục cục bộ không đổi đường dẫn notebook trên Google Colab. Đường dẫn `/content/fashion_mnist_basic` trong notebook là trên máy Colab, được giữ nguyên.
-
-## Quy tắc lưu tệp mới
-
-- Ảnh/nhãn gốc dùng chung → `DU_LIEU`; mã và kết quả thực hiện → đúng thư mục giai đoạn.
-- Mỗi lần thí nghiệm có thư mục kết quả riêng theo run ID; giữ cấu hình, checkpoint, dự đoán, chỉ số và hình cùng nhau.
-- Tài liệu hướng dẫn, báo cáo, slide → `TAI_LIEU`; ảnh minh họa tạo từ thí nghiệm ở cùng run nguồn, chỉ sao chép vào báo cáo khi cần.
-- Tệp cũ/tạm → `RAC` kèm lý do. Không coi checkpoint, dữ liệu `.gz` hay gói kết quả ZIP là rác chỉ vì có bản giải nén.
-
-Không xóa tệp gốc trong lần sắp xếp này. [Nhật ký chuyển tệp](TAI_LIEU/NHAT_KY_SAP_XEP.json) lưu đường dẫn cũ/mới và mã SHA256 trước chỉnh sửa để đối chiếu.
-
-
-## Bắt đầu mã giai đoạn 3
-
-Đọc [cấu trúc và lệnh chạy](03_Thuc_Nghiem_Cai_Tien/README.md), rồi [giải thích từng phần](TAI_LIEU/05_Huong_Dan_Giai_Doan_3/HUONG_DAN_DOC_CODE.md). Bước đầu là `--inspect`, chỉ xem dữ liệu, không train.
+**Quy ước:** dùng tên không dấu, chữ thường, nối từ bằng `_`. Chỉ đánh số khi thứ tự có ý nghĩa. Notebook ở `notebooks/`, script hỗ trợ ở `scripts/`, mã mô hình ở `src/`, kết quả ở `artifacts/<run_id>/` của giai đoạn tương ứng. Giữ nguyên tên file do thư viện và lần chạy sinh ra. Train trên Google Colab GPU.
