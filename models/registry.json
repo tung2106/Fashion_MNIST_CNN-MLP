@@ -1,0 +1,26 @@
+{
+  "mlp": {
+    "checkpoint": "checkpoints/mlp.pt",
+    "model": "MLP",
+    "source_run": "selection_20261104_144952_e58647",
+    "trial": "mlp",
+    "seed": 42,
+    "sha256": "1a1d915c5e943c242b7820fce19a845d654382c4aa12859487753e05e04c9bdb"
+  },
+  "cnn": {
+    "checkpoint": "checkpoints/cnn.pt",
+    "model": "CNN",
+    "source_run": "selection_20261104_144952_e58647",
+    "trial": "cnn",
+    "seed": 42,
+    "sha256": "42e484e4f333511313a33d347a962a164d66baff79caa049e3034829a45e9cc8"
+  },
+  "cnn_plus": {
+    "checkpoint": "checkpoints/cnn_plus.pt",
+    "model": "CNNPlus",
+    "source_run": "selection_20261104_144952_e58647",
+    "trial": "cnn_plus_aug",
+    "seed": 42,
+    "sha256": "8b835f79034215d26c0c3a181c6ef941d3f774383e8c61395918baff5130846b"
+  }
+}

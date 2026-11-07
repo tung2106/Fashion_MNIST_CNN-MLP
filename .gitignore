@@ -16,21 +16,16 @@ __pycache__/
 !.env.example
 
 # Private AI instructions, prompts, and implementation skills
-/tai_lieu_du_an/ke_hoach_noi_bo/
+/docs/private/
 SKILL.md
 AGENTS.md
 /codex.md
 
 # Shared raw data stays local; retain the explanatory README
-/du_lieu_chung/*
-!/du_lieu_chung/README.md
+/data/raw/
 
 # Old files and temporary review material stay local
-/luu_tru/
-
-# Prior group's report and machine-specific reorganization records
-/tai_lieu_du_an/tham_khao/*.docx
-/tai_lieu_du_an/lich_su/
+/archive/
 
 # Model weights and compressed delivery archives
 *.pt
@@ -41,5 +36,8 @@ AGENTS.md
 *.rar
 *.7z
 
-# Stage 3 run outputs: select report artifacts explicitly after review
-/03_thuc_nghiem/artifacts/
+# Immutable run outputs stay local; reviewed tables/figures live in reports/.
+/experiments/runs/
+/experiments/learning/
+/demo/output/
+/training.log

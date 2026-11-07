@@ -1,21 +1,52 @@
-# Phân loại trang phục bằng CNN và MLP
+# Phân loại ảnh thời trang bằng CNN trên Fashion-MNIST
 
-Dự án dùng Fashion-MNIST để so sánh cách MLP và CNN phân loại cùng một ảnh thành 10 loại trang phục. Nếu mới học, mở [notebook 01 trên Colab](https://colab.research.google.com/drive/1hvzAjJsUWkK7WS5SVVZ1j1Bh1Ng7uTTS) hoặc [bản trong dự án](02_thuc_hanh_colab/notebooks/01_hoc_tung_buoc.ipynb).
+Dự án học sâu phân loại ảnh xám 28×28 thành 10 lớp. CNN là mô hình chính; MLP làm đối chứng. Mã được tổ chức theo chức năng, dùng chung cho huấn luyện, đánh giá và demo.
 
-[Đánh giá mô hình để chuẩn bị demo](tai_lieu_du_an/bao_cao_nhom/ket_qua_20261104/danh_gia_chuan_bi_demo.md): kết quả đã tải và kiểm chứng, phân tích đặc trưng/lỗi, giới hạn và phần việc còn lại.
-
-| Giai đoạn | Mở tại đây | Nội dung |
+| Thư mục | Có gì? | Mở khi cần |
 |---|---|---|
-| 01 · Khám phá dữ liệu | [xem_du_lieu.py](01_kham_pha_du_lieu/xem_du_lieu.py) | Xem ảnh 28×28, nhãn, pixel và số ảnh mỗi lớp. |
-| 02 · Thực hành Colab | [Hướng dẫn](02_thuc_hanh_colab/README.md) | Học theo từng ô; so sánh MLP và CNN. Đã train và test bộ mô hình cơ bản. |
-| 03 · Thực nghiệm | [Mã nguồn và lệnh chạy](03_thuc_nghiem/README.md) | Đã so sánh 7 cấu hình trên Colab GPU, xác nhận cấu hình chọn qua 3 seed và đánh giá test. |
-| 04 · Demo | [Kế hoạch demo](04_demo/README.md) | Đã có mã inference dùng checkpoint. Chưa có giao diện riêng. |
-| 05 · Bàn giao | [Danh mục bàn giao](05_ban_giao/README.md) | Chuẩn bị báo cáo, slide, hướng dẫn và gói nộp. Chưa có bản cuối. |
+| [models](models/README.md) | Kiến trúc MLP/CNN, nạp mô hình, checkpoint đã chọn | Xem mô hình, dùng trọng số cho demo |
+| [data](data/README.md) | Dữ liệu gốc, chia tập, chuẩn hóa, augmentation | Hiểu đầu vào của mô hình |
+| [training](training/README.md) | Vòng học, cấu hình, lựa chọn mô hình | Train trên Colab GPU |
+| [evaluation](evaluation/README.md) | Tính chỉ số, đường học, ma trận nhầm và đặc trưng | Phân tích chất lượng/lỗi |
+| [demo](demo/README.md) | Ảnh mẫu và lệnh tạo hình dự đoán offline | Trình bày demo |
+| [reports](reports/README.md) | Báo cáo, bảng và hình đã kiểm chứng | Viết báo cáo, slide |
+| [notebooks](notebooks/README.md) | Notebook học tập và chạy Colab | Thực hành từng bước |
+| [docs](docs/README.md) | Kiến thức nền, hướng dẫn, nguồn tham khảo | Tra cứu |
+| [experiments](experiments/README.md) | Các lần chạy gốc, log, ZIP và source snapshot | Truy vết số liệu |
+| `scripts/`, `tests/`, `utils/` | Lệnh hỗ trợ, kiểm tra và đường dẫn chung | Bảo trì dự án |
+| `archive/` | Bản cũ giữ trên máy để đối chiếu | Xem lịch sử, không chạy như mã hiện hành |
 
-**Nơi lưu chung:** [du_lieu_chung](du_lieu_chung/README.md) chứa ảnh và nhãn gốc; [tai_lieu_du_an](tai_lieu_du_an/README.md) chứa hướng dẫn, ảnh minh họa và tài liệu nhóm. `luu_tru/` giữ tệp cũ trên máy.
+## Bắt đầu
 
-**Kết quả mới 04/11/2026:** [notebook lựa chọn mô hình](https://colab.research.google.com/drive/1K9FNgM9mzUL55AmOaVcc_vIfLd5DKkP0) ghi accuracy **test** MLP 88,55%, CNN cơ bản 92,11%, CNNPlus + augmentation 93,70%. Cấu hình được chọn bằng validation, không bằng test. Trung bình test qua 3 seed: 93,80% ± 0,091 điểm phần trăm (độ lệch chuẩn mẫu). Xem [tiến độ và trạng thái tải kết quả](tai_lieu_du_an/huong_dan_thuc_nghiem/tien_do_giai_doan_03.md).
+Từ thư mục gốc dự án, dùng Python trong môi trường `.venv` đã có:
 
-**Mốc lịch sử:** [test giai đoạn 02](02_thuc_hanh_colab/artifacts/20261029_092231_60aa1b/metrics/summary.csv) MLP 87,50%, CNN 90,27%; [mốc 5 epoch giai đoạn 03](https://colab.research.google.com/drive/1WiCTnJhuDdR6ovY-NCgWCHWbYDRqWdjH) MLP 88,58%, CNN 91,32% trên **validation**. Không trộn số đo validation với test.
+```powershell
+.\.venv\Scripts\python.exe -m demo.predict --image demo/examples/sample_19.png
+```
 
-**Quy ước:** dùng tên không dấu, chữ thường, nối từ bằng `_`. Chỉ đánh số khi thứ tự có ý nghĩa. Notebook ở `notebooks/`, script hỗ trợ ở `scripts/`, mã mô hình ở `src/`, kết quả ở `artifacts/<run_id>/` của giai đoạn tương ứng. Giữ nguyên tên file do thư viện và lần chạy sinh ra. Train trên Google Colab GPU.
+Lệnh nạp `models/checkpoints/cnn_plus.pt`, trả top-3. Đổi ảnh thành `sample_2914.png` để xem ví dụ đoán sai. Inference có thể chạy CPU; mọi train/smoke/kiểm tra cập nhật trọng số chỉ chạy Colab GPU.
+
+```powershell
+# Chỉ đóng gói mã để upload Colab, không train:
+.\.venv\Scripts\python.exe -m scripts.pack_source
+```
+
+Upload `experiments/source.zip` rồi dùng [notebook lựa chọn mô hình](notebooks/05_chon_mo_hinh_demo.ipynb). Thư viện khai báo tại [requirements.txt](requirements.txt); không cần cài lại nếu môi trường hiện có vẫn hoạt động.
+
+## Kết quả đã có
+
+Run `selection_20261104_144952_e58647`, train Tesla T4 trên Colab ngày 04/11/2026:
+
+| Mô hình, seed 42 | Accuracy test |
+|---|---:|
+| MLP | 88,55% |
+| CNN cơ bản | 92,11% |
+| CNNPlus + augmentation | **93,70%** |
+
+Cấu hình được chọn bằng validation; 3 seed có accuracy test trung bình 93,80%, độ lệch chuẩn mẫu 0,091 điểm phần trăm. Đọc [báo cáo đánh giá](reports/results/20261104/danh_gia_chuan_bi_demo.md). Giữ nguyên split, mô hình và trọng số khi đổi cấu trúc thư mục.
+
+## Chuẩn bị demo và báo cáo
+
+Mở [hướng dẫn demo offline](demo/README.md) để chạy dự đoán CPU, lưu hình và tập trình bày trong 5–7 phút. [Notebook demo](notebooks/06_demo_fashion_mnist.ipynb) có phần so sánh ba mô hình, ảnh dự đoán sai, bản đồ đặc trưng và ma trận nhầm lẫn.
+
+ZIP, dữ liệu gốc, trọng số và hướng dẫn AI giữ local theo `.gitignore`. Khi clone GitHub, cần bổ sung checkpoint để chạy demo. Các notebook đã lưu trên Drive là bằng chứng lịch sử. Bản mã hiện hành dùng cấu trúc thư mục mới và demo offline; các notebook huấn luyện sau sắp xếp chưa chạy lại trên Colab.

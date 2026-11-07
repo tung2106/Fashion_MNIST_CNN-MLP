@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-05",
+  "immutable_files_verified": 253,
+  "old_layout_files_moved": 366,
+  "checkpoint_copies_verified": 3,
+  "inference_comparisons_passed": 18,
+  "markdown_links": "PASS",
+  "raw_and_artifact_bytes_unchanged": true,
+  "local_training": false,
+  "colab_rerun": false,
+  "pushed": false
+}
