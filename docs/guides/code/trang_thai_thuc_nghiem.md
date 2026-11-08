@@ -18,7 +18,7 @@ Mã chia theo models/data/training/evaluation/demo; báo cáo ở reports, noteb
 - Lượt khởi động thử trước đó bị dừng để bổ sung đủ đối chứng; không dùng kết quả dở làm số liệu cuối. Lượt chính có log từng epoch và source snapshot.
 - ZIP đã được người dùng tải vào `experiments/runs/selection_20261104_144952_e58647.zip`, 45.321.073 byte. SHA256 `0eeb6ec013f881a77bef3ef6019e9fcdf25ff1c458074c25ca0f195bc264b90c` khớp Colab, CRC PASS; đã giải nén 172 tệp vào thư mục cùng tên. Có `DOWNLOAD_VERIFIED.json`.
 - Inference CPU trên 6 ảnh (4 đúng, 2 sai) khớp Colab trong dung sai; CLI chạy thành công. Đã tính lại accuracy/macro-F1, kiểm tra ma trận/support/hash cho cả 5 bảng test. Có `LOCAL_INFERENCE_VERIFIED.json`; không train trên máy cá nhân.
-- [Báo cáo chuẩn bị demo](../../../reports/results/20261104/danh_gia_chuan_bi_demo.md) đã bổ sung bảng, hình, phân tích đặc trưng/lỗi và đối chiếu yêu cầu. Đủ checkpoint để bắt đầu demo Fashion-MNIST; chưa có giao diện hoàn chỉnh. Bản cập nhật Git gồm mã, notebook, tài liệu và hình/bảng đã kiểm chứng; ZIP, trọng số và hướng dẫn AI giữ local.
+- [Báo cáo chuẩn bị demo](../../../reports/results/20261104/bao_cao_danh_gia.md) đã bổ sung bảng, hình, phân tích đặc trưng/lỗi và đối chiếu yêu cầu. Đủ checkpoint để bắt đầu demo Fashion-MNIST; chưa có giao diện hoàn chỉnh. Bản cập nhật Git gồm mã, notebook, tài liệu và hình/bảng đã kiểm chứng; ZIP, trọng số và hướng dẫn AI giữ local.
 - Bản được chọn chạm ngân sách 30 epoch; không tuyên bố tối ưu tuyệt đối. Test đã được xem từ giai đoạn 2; không dùng test để tiếp tục chọn cấu hình.
 
 Các mục ngày 31/10 bên dưới là lịch sử, không thay thế giao thức mới tại `giao_thuc_chon_mo_hinh.md`.
@@ -27,7 +27,7 @@ Các mục ngày 31/10 bên dưới là lịch sử, không thay thế giao th�
 
 - Tách mã cơ bản từ notebook giai đoạn 2 thành data/models/engine/evaluate/plots/utils và main.py.
 - Tạo cấu hình baseline, smoke; lệnh inspect không train, train mặc định không xem test.
-- Tạo môi trường `.venv`, dùng lại torch/torchvision có sẵn; các gói bổ sung cài vào venv. Phiên bản đã kiểm tra được ghi tại `training/configs/moi_truong_da_kiem_tra.json`.
+- Tạo môi trường `.venv`, dùng lại torch/torchvision có sẵn; các gói bổ sung cài vào venv. Phiên bản đã kiểm tra được ghi tại `training/configs/moi_truong.json`.
 - Viết hướng dẫn tiếng Việt và notebook mỏng gọi code chung. Notebook mỏng đã kiểm tra cú pháp, chưa upload hoặc chạy trên Colab.
 - Không sửa notebook/mã cũ và không tác động phiên GPU Colab đang được giữ lại.
 

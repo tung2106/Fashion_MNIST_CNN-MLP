@@ -10,14 +10,14 @@ from uuid import uuid4
 import torch
 import torchvision
 
-from data.dataset import load_test, make_loader, prepare_data
-from evaluation.evaluate import evaluate_models
-from evaluation.plots import plot_history, plot_samples
-from models.networks import MODEL_CLASSES
-from training.engine import fit
-from utils.io import save_json
-from utils.paths import DATA_DIR, RUNS_DIR
-from utils.runtime import require_colab_gpu
+from data.chuan_bi_du_lieu import load_test, make_loader, prepare_data
+from evaluation.danh_gia_mo_hinh import evaluate_models
+from evaluation.ve_bieu_do import plot_history, plot_samples
+from models.kien_truc_mo_hinh import MODEL_CLASSES
+from training.vong_lap_huan_luyen import fit
+from utils.duong_dan import DATA_DIR, RUNS_DIR
+from utils.ho_tro_thuc_nghiem import save_json
+from utils.kiem_tra_gpu import require_colab_gpu
 
 TRAINING_DIR = Path(__file__).resolve().parent
 
@@ -26,7 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--config",
-        default="configs/baseline.json",
+        default="configs/co_ban.json",
         help="Tương đối với thư mục training/.",
     )
     parser.add_argument(
@@ -39,6 +39,7 @@ def main():
     )
     parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
     args = parser.parse_args()
+
     config = json.loads((TRAINING_DIR / args.config).read_text(encoding="utf-8"))
     if config["profile"] not in ("baseline", "smoke"):
         parser.error("profile phải là baseline hoặc smoke")
@@ -50,15 +51,18 @@ def main():
         parser.error(f"models phải thuộc {list(MODEL_CLASSES)}")
     if args.evaluate_test and (config["profile"] == "smoke" or args.inspect):
         parser.error("Không test trong chế độ smoke/inspect.")
+
     # Giữ số thread nhất quán với cấu hình thực nghiệm.
     torch.set_num_threads(2)
     if not args.inspect:
         require_colab_gpu()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     run = RUNS_DIR / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid4().hex[:8])
     run.mkdir(parents=True, exist_ok=False)
     for name in ["checkpoints", "metrics", "figures"]:
         (run / name).mkdir()
+
     config.update(
         device=str(device),
         python=platform.python_version(),
@@ -71,27 +75,32 @@ def main():
     save_json(run / "config.json", config)
     save_json(run / "STATUS.json", {"stage": "preparing"})
     print("Run:", run, flush=True)
+
     try:
         data = prepare_data(args.data_dir, config, run)
         images, labels = next(iter(make_loader(data["train"], config)))
         print("Train/validation:", len(data["train"]), len(data["validation"]))
         print("Batch images/labels:", tuple(images.shape), tuple(labels.shape))
         plot_samples(data, run)
+
         if args.inspect:
             save_json(
                 run / "STATUS.json",
                 {"stage": "data_inspected", "trained": False, "test_evaluated": False},
             )
             return
+
         training_info = {}
         for name in config["models"]:
             training_info[name] = fit(name, data, config, device, run)
             plot_history(name, run)
+
         if args.evaluate_test:
             test = load_test(args.data_dir, data)
             evaluate_models(
                 make_loader(test, config), config, device, run, training_info
             )
+
         save_json(
             run / "STATUS.json",
             {

@@ -13,14 +13,14 @@ import torch
 import torchvision
 from sklearn.metrics import accuracy_score, f1_score
 
-from data.dataset import load_test, make_loader, prepare_data
-from evaluation.evaluate import evaluate_models, predict
-from evaluation.plots import plot_history
-from models.networks import MODEL_CLASSES
-from training.engine import fit
-from utils.io import file_hash, save_json
-from utils.paths import DATA_DIR, ROOT, RUNS_DIR
-from utils.runtime import require_colab_gpu
+from data.chuan_bi_du_lieu import load_test, make_loader, prepare_data
+from evaluation.danh_gia_mo_hinh import evaluate_models, predict
+from evaluation.ve_bieu_do import plot_history
+from models.kien_truc_mo_hinh import MODEL_CLASSES
+from training.vong_lap_huan_luyen import fit
+from utils.duong_dan import DATA_DIR, ROOT, RUNS_DIR
+from utils.ho_tro_thuc_nghiem import file_hash, save_json
+from utils.kiem_tra_gpu import require_colab_gpu
 
 TRAINING_DIR = Path(__file__).resolve().parent
 
@@ -58,7 +58,7 @@ def trial(label, model_name, seed, augment, base, suite):
 def main():
     require_colab_gpu()
     torch.set_num_threads(2)
-    base = json.loads((TRAINING_DIR / "configs/selection.json").read_text())
+    base = json.loads((TRAINING_DIR / "configs/chon_mo_hinh.json").read_text())
     suite = RUNS_DIR / (
         "selection_" + datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid4().hex[:6]
     )
@@ -184,7 +184,7 @@ def main():
             suite / winner["trial"] / "checkpoints" / f"{winner['model']}_best.pt",
             demo / "model.pt",
         )
-        shutil.copy2(ROOT / "models/networks.py", demo / "models.py")
+        shutil.copy2(ROOT / "models/kien_truc_mo_hinh.py", demo / "models.py")
         shutil.copy2(
             suite / winner["trial"] / "preprocessing.json", demo / "preprocessing.json"
         )

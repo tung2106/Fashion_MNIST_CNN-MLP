@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 
 # Tìm thư mục dữ liệu chung từ vị trí tệp, dù chạy từ thư mục nào.
-from utils.paths import DATA_DIR
+from utils.duong_dan import DATA_DIR
 
 DATA_ROOT = DATA_DIR
 

@@ -6,15 +6,15 @@
 
 Notebook giữ biến giữa các ô. Chương trình Python gọi các hàm có đầu vào/đầu ra rõ ràng, không yêu cầu nhớ ô nào đã chạy. Chia file không tự tăng accuracy; nó giúp sửa đúng nơi, kiểm tra và dùng lại cho demo.
 
-Luồng: **training.train → data.dataset → models.networks → training.engine → evaluation.evaluate → evaluation.plots**. `utils` hỗ trợ nhiều phần. Thứ tự đọc nên là cấu hình → dữ liệu → mô hình → vòng học → đánh giá → main. Chưa cần hiểu argparse hay SHA256 trước khi học vòng train.
+Luồng: **training.huan_luyen → data.chuan_bi_du_lieu → models.kien_truc_mo_hinh → training.vong_lap_huan_luyen → evaluation.danh_gia_mo_hinh → evaluation.ve_bieu_do**. `utils` hỗ trợ nhiều phần. Thứ tự đọc nên là cấu hình → dữ liệu → mô hình → vòng học → đánh giá → main. Chưa cần hiểu argparse hay SHA256 trước khi học vòng train.
 
 ## 1. configs: các lựa chọn của thí nghiệm
 
-`baseline.json` là bảng khóa–giá trị: seed 42, batch size 128, epochs 5, lr 0.001. `config['epochs']` đọc giá trị 5. Batch là một nhóm ảnh, epoch là một lượt qua train, learning rate ảnh hưởng quy mô cập nhật, seed điều khiển nguồn ngẫu nhiên để dễ lặp lại.
+`co_ban.json` là bảng khóa–giá trị: seed 42, batch size 128, epochs 5, lr 0.001. `config['epochs']` đọc giá trị 5. Batch là một nhóm ảnh, epoch là một lượt qua train, learning rate ảnh hưởng quy mô cập nhật, seed điều khiển nguồn ngẫu nhiên để dễ lặp lại.
 
-`smoke.json` dùng 320 train/80 validation, 1 epoch để tìm lỗi chương trình nhanh. Số liệu đó không đại diện chất lượng đồ án.
+`chay_thu.json` dùng 320 train/80 validation, 1 epoch để tìm lỗi chương trình nhanh. Số liệu đó không đại diện chất lượng đồ án.
 
-## 2. data/dataset.py: chuẩn bị dữ liệu
+## 2. data/chuan_bi_du_lieu.py: chuẩn bị dữ liệu
 
 ```python
 train_ids, val_ids = split_indices(raw.targets, config['seed'])
@@ -32,7 +32,7 @@ Chọn pixel chỉ của train, đổi sang số thực, đưa thang 0–255 v�
 
 `Subset` chọn ảnh theo ID. `DataLoader` gom ảnh thành batch. `shuffle=True` đổi thứ tự ảnh train; không làm thay đổi nhãn và không chia lại tập. Với 54.000 ảnh, batch 128 có 422 batch, batch cuối có 112 ảnh.
 
-## 3. models/networks.py: cấu trúc mạng
+## 3. models/kien_truc_mo_hinh.py: cấu trúc mạng
 
 `class MLP(nn.Module)` định nghĩa mạng kế thừa khả năng quản lý tham số của PyTorch. `__init__` tạo các lớp khi gọi `MLP()`. `self` là đối tượng mạng hiện tại; `super().__init__()` khởi tạo chức năng lớp cha. `nn.Sequential` xếp lớp theo thứ tự. `forward(self, x)` mô tả đường đi khi gọi `model(images)`.
 
@@ -49,7 +49,7 @@ B là số ảnh, 128 trong Linear là số nút chứ không phải batch size.
 
 Trọng số được PyTorch khởi tạo khi tạo model. Train sửa trọng số; optimizer không sửa pixel đầu vào. MLP ở đây có 101.770 tham số, CNN 206.922: CNN không luôn ít tham số hơn MLP. Cả hai trả **logits**: 10 điểm lớp mỗi ảnh, không phải pixel hoặc phần trăm.
 
-## 4. training/engine.py: vòng học quan trọng nhất
+## 4. training/vong_lap_huan_luyen.py: vòng học quan trọng nhất
 
 ```python
 optimizer.zero_grad(set_to_none=True)
@@ -71,7 +71,7 @@ Validation không truyền optimizer. Hàm chọn eval mode, tắt ghi đồ th�
 
 Loss batch là trung bình; batch cuối có thể nhỏ, nên cộng `loss * số ảnh` rồi chia tổng số ảnh. Không lấy trung bình đơn giản các batch khác kích thước.
 
-## 5. evaluate.py: kiểm tra chất lượng
+## 5. danh_gia_mo_hinh.py: kiểm tra chất lượng
 
 Checkpoint lưu `state_dict` (tên tham số → tensor), model, epoch, mean/std và tên lớp. Nạp trọng số vào đúng kiến trúc mới khôi phục được mạng. Best là tốt nhất theo validation; last là trạng thái cuối, có thể kém best. Bản hiện tại chưa tự resume.
 
@@ -83,13 +83,13 @@ Hàm đánh giá nạp **best**, Softmax đổi logits thành xác suất rồi 
 - Kiểm tra tổng ma trận = 10.000 và tổng đường chéo / 10.000 = accuracy.
 - CSV predictions chứa ID, nhãn thật, dự đoán, 10 xác suất và hash checkpoint. Hash nhận diện file, không đo chất lượng.
 
-## 6. plots.py và utils.py
+## 6. ve_bieu_do.py và utils.py
 
 Plots vẽ ảnh mẫu, đường cong từ history, ma trận từ predictions và feature maps. Khi vẽ ảnh, hoàn tác Normalize bằng `image * std + mean`. Feature map là phản ứng bộ lọc, không chứng minh kênh nào hiểu tay áo. Mỗi kênh có thang màu riêng, không so độ sáng tuyệt đối giữa chúng.
 
 Utils gom việc phụ trợ: đặt seed, lưu JSON và tính SHA256. JSON chứa thông tin có cấu trúc, CSV chứa bảng, NPZ chứa mảng, PT chứa checkpoint. Các file cùng run ID thuộc một lần chạy.
 
-## 7. training/train.py: nối các phần
+## 7. training/huan_luyen.py: nối các phần
 
 `main()` đọc tùy chọn lệnh, tạo thư mục run mới, lưu cấu hình, gọi chuẩn bị dữ liệu. Nếu có `--inspect`, chương trình dừng sau xem dữ liệu. Nếu không, nó train MLP rồi CNN. Chỉ cờ `--evaluate-test` mới thêm bước test. Mỗi lệnh train tạo run mới, chưa hỗ trợ đánh giá độc lập run cũ.
 
@@ -97,7 +97,7 @@ Utils gom việc phụ trợ: đặt seed, lưu JSON và tính SHA256. JSON ch�
 
 ## 8. Bài học nhỏ nên làm ngay
 
-1. Chạy `training/train.py --inspect` theo README giai đoạn 3. Tìm 54000/6000, shape ảnh [128,1,28,28], nhãn [128]. Mở train_samples.png trong run vừa in. Giải thích từng chiều trước khi đi tiếp.
+1. Chạy `training/huan_luyen.py --inspect` theo README giai đoạn 3. Tìm 54000/6000, shape ảnh [128,1,28,28], nhãn [128]. Mở train_samples.png trong run vừa in. Giải thích từng chiều trước khi đi tiếp.
 2. Đọc models.py, viết lại shape CNN trên giấy. Vì sao 32×7×7 = 1568? Vì sao đầu ra là 10?
 3. Đọc run_epoch, chỉ ra backward/step và lý do validation bỏ hai dòng đó. Sau đó chạy smoke để xem vòng học thực sự hoạt động.
 4. Sao chép cấu hình smoke rồi thử batch size 32. Dự đoán số batch trước khi chạy. Đây là thực hành kỹ thuật, không thí nghiệm chất lượng.

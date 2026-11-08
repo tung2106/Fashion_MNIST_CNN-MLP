@@ -10,27 +10,27 @@ import torch
 from PIL import Image
 from torchvision.datasets import FashionMNIST
 
-from models.inference import load_model, predict_image
-from utils.io import file_hash
-from utils.paths import DATA_DIR, ROOT, latest_run
-from utils.runtime import is_colab_gpu, require_colab_gpu
+from models.du_doan import load_model, predict_image
+from utils.duong_dan import DATA_DIR, ROOT, latest_run
+from utils.ho_tro_thuc_nghiem import file_hash
+from utils.kiem_tra_gpu import is_colab_gpu, require_colab_gpu
 
 
 def main():
     torch.set_num_threads(2)
     for module in [
-        "models.networks",
-        "models.inference",
-        "data.dataset",
-        "training.train",
-        "training.engine",
-        "training.select_model",
-        "evaluation.evaluate",
-        "evaluation.plots",
-        "evaluation.analyze_selection",
-        "demo.predict",
-        "scripts.pack_source",
-        "utils.paths",
+        "models.kien_truc_mo_hinh",
+        "models.du_doan",
+        "data.chuan_bi_du_lieu",
+        "training.huan_luyen",
+        "training.vong_lap_huan_luyen",
+        "training.chon_mo_hinh",
+        "evaluation.danh_gia_mo_hinh",
+        "evaluation.ve_bieu_do",
+        "evaluation.phan_tich_ket_qua",
+        "demo.du_doan_anh",
+        "scripts.dong_goi_colab",
+        "utils.duong_dan",
     ]:
         importlib.import_module(module)
     for folder in [
@@ -67,7 +67,7 @@ def main():
     assert len(split["train"]) == 54000 and len(split["validation"]) == 6000
     assert not np.intersect1d(split["train"], split["validation"]).size
 
-    registry = json.loads((ROOT / "models/registry.json").read_text())
+    registry = json.loads((ROOT / "models/danh_sach_mo_hinh.json").read_text())
     samples = json.loads((ROOT / "demo/examples/labels.json").read_text())
     checked = []
     for key, entry in registry.items():

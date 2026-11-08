@@ -8,11 +8,11 @@ import numpy as np
 import torch
 from torch.utils.data import TensorDataset
 
-from data.dataset import make_loader, split_indices
-from models.inference import load_model
-from models.networks import MODEL_CLASSES
-from training.engine import fit, run_epoch
-from utils.runtime import require_colab_gpu
+from data.chuan_bi_du_lieu import make_loader, split_indices
+from models.du_doan import load_model
+from models.kien_truc_mo_hinh import MODEL_CLASSES
+from training.vong_lap_huan_luyen import fit, run_epoch
+from utils.kiem_tra_gpu import require_colab_gpu
 
 
 def main():
@@ -51,7 +51,7 @@ def main():
             values.extend(
                 [dict(loss=0.4, accuracy=0.5), dict(loss=val_loss, accuracy=0.5)]
             )
-        with patch("training.engine.run_epoch", side_effect=values):
+        with patch("training.vong_lap_huan_luyen.run_epoch", side_effect=values):
             info = fit("CNNPlus", bundle, config, "cuda", run)
         assert info["epochs_run"] == 5 and info["best_epoch"] == 2
         model, payload, _ = load_model(run / "checkpoints/CNNPlus_best.pt", "cuda")

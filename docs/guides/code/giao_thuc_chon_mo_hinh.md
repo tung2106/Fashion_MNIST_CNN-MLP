@@ -38,12 +38,12 @@ Báo cáo cũ có số liệu giữa lời, bảng và hình chưa khớp. Mã m
 
 ## Đọc mã theo thứ tự
 
-1. `data.py`: ảnh → split → chuẩn hóa → batch.
-2. `models.py`: ảnh → các lớp mạng → 10 logits.
-3. `engine.py`: logits + nhãn → Cross-Entropy → gradient → Adam cập nhật trọng số; validation không cập nhật.
-4. `select_model.py`: điều phối các thử nghiệm theo quy tắc trên.
-5. `evaluate.py` và `analyze_selection.py`: đo chất lượng, kiểm chứng bảng/hình, phân tích lỗi.
-6. `inference.py`: chỉ nạp trọng số và dự đoán; dùng lại cho demo.
+1. `data/chuan_bi_du_lieu.py`: ảnh → split → chuẩn hóa → batch.
+2. `models/kien_truc_mo_hinh.py`: ảnh → các lớp mạng → 10 logits.
+3. `training/vong_lap_huan_luyen.py`: logits + nhãn → Cross-Entropy → gradient → Adam cập nhật trọng số; validation không cập nhật.
+4. `training/chon_mo_hinh.py`: điều phối các thử nghiệm theo quy tắc trên.
+5. `evaluation/danh_gia_mo_hinh.py` và `evaluation/phan_tich_ket_qua.py`: đo chất lượng, kiểm chứng bảng/hình, phân tích lỗi.
+6. `models/du_doan.py`: chỉ nạp trọng số và dự đoán; dùng lại cho demo.
 
 Adam dùng thông tin gradient hiện tại và tích lũy để điều chỉnh bước cập nhật từng tham số. Cross-Entropy phạt việc dành xác suất thấp cho nhãn đúng; nó nhận logits và nhãn, không so sánh từng pixel. Softmax dùng hiển thị điểm dự đoán, không đặt thêm trước CrossEntropyLoss.
 

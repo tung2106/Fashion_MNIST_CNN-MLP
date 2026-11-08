@@ -6,4 +6,4 @@ Các file `.pt` giữ local, không train lại để tạo chúng. Nguồn: `ex
 - `cnn.pt`: `cnn/checkpoints/CNN_best.pt`.
 - `cnn_plus.pt`: `cnn_plus_aug/checkpoints/CNNPlus_best.pt` — bản demo chính.
 
-File JSON cùng tên lưu nhãn và mean/std từ train. `../registry.json` ghi nguồn. Khi lấy ZIP kết quả ở máy khác, copy đúng checkpoint vào đây; không thay bằng trọng số khác mà giữ nguyên tên/metadata.
+File JSON cùng tên lưu nhãn và mean/std từ train. `../danh_sach_mo_hinh.json` ghi nguồn. Khi lấy ZIP kết quả ở máy khác, copy đúng checkpoint vào đây; không thay bằng trọng số khác mà giữ nguyên tên/metadata.

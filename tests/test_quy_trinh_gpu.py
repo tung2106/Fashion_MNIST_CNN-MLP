@@ -11,11 +11,11 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
-from data.dataset import split_indices
-from evaluation.evaluate import evaluate_models, predict
-from models.networks import CNN, MLP
-from training.engine import run_epoch
-from utils.runtime import is_colab_gpu
+from data.chuan_bi_du_lieu import split_indices
+from evaluation.danh_gia_mo_hinh import evaluate_models, predict
+from models.kien_truc_mo_hinh import CNN, MLP
+from training.vong_lap_huan_luyen import run_epoch
+from utils.kiem_tra_gpu import is_colab_gpu
 
 torch.set_num_threads(2)
 

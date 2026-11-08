@@ -7,8 +7,8 @@ from pathlib import Path
 from matplotlib import pyplot as plt
 from PIL import Image
 
-from models.inference import load_model, predict_image
-from utils.paths import DEFAULT_CHECKPOINT, ROOT
+from models.du_doan import load_model, predict_image
+from utils.duong_dan import DEFAULT_CHECKPOINT, ROOT
 
 EXAMPLES = ROOT / "demo" / "examples"
 OUTPUT = ROOT / "demo" / "output"

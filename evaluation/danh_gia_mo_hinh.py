@@ -10,18 +10,20 @@ from sklearn.metrics import (
     f1_score,
 )
 
-from evaluation.plots import plot_features, plot_matrix
-from models.networks import MODEL_CLASSES
-from utils.io import file_hash, save_json
+from evaluation.ve_bieu_do import plot_features, plot_matrix
+from models.kien_truc_mo_hinh import MODEL_CLASSES
+from utils.ho_tro_thuc_nghiem import file_hash, save_json
 
 
 def predict(model, loader, device):
     model.eval()
     labels, probabilities = [], []
+
     with torch.no_grad():
         for images, targets in loader:
             probabilities.append(model(images.to(device)).softmax(1).cpu().numpy())
             labels.append(targets.numpy())
+
     return np.concatenate(labels), np.concatenate(probabilities)
 
 
@@ -39,6 +41,7 @@ def evaluate_models(loader, config, device, run, training_info):
             "note": "Test đã được xem ở giai đoạn 2; đây không phải holdout chưa từng biết.",
         },
     )
+
     rows = []
     for name in config["models"]:
         payload = torch.load(
@@ -48,12 +51,14 @@ def evaluate_models(loader, config, device, run, training_info):
         )
         model = MODEL_CLASSES[name]().to(device)
         model.load_state_dict(payload["state_dict"])
+
         true, probs = predict(model, loader, device)
         pred = probs.argmax(1)
         matrix = confusion_matrix(true, pred, labels=range(10))
         accuracy = accuracy_score(true, pred)
         assert len(true) == 10000 and matrix.sum() == len(true)
         assert np.isclose(matrix.trace() / len(true), accuracy)
+
         table = pd.DataFrame(
             dict(
                 sample_id=np.arange(len(true)),
@@ -66,6 +71,7 @@ def evaluate_models(loader, config, device, run, training_info):
         )
         for k in range(10):
             table[f"prob_{k}"] = probs[:, k]
+
         table.to_csv(run / "metrics" / f"{name}_predictions.csv", index=False)
         np.save(run / "metrics" / f"{name}_confusion.npy", matrix)
         save_json(
@@ -103,6 +109,7 @@ def evaluate_models(loader, config, device, run, training_info):
                     "display": "independent color scale per channel; descriptive, not causal",
                 },
             )
+
     summary = pd.DataFrame(rows)
     summary.to_csv(run / "metrics" / "summary.csv", index=False)
     print(summary.to_string(index=False))

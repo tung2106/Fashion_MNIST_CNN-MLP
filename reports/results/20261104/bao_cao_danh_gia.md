@@ -104,7 +104,7 @@ Conv học mẫu cục bộ và dùng cùng bộ lọc ở nhiều vị trí; po
 - Kiểm chứng nạp lại checkpoint và inference từng ảnh khớp dự đoán đánh giá; số liệu bảng/ma trận/predictions nhất quán. Cả 9 lần chạy dùng cùng split, khớp mốc lịch sử.
 - ZIP đã tải, SHA256 khớp Colab, CRC PASS; giải nén 172 tệp. Inference CPU trên 6 ảnh (4 đúng, 2 sai) khớp xác suất Colab trong dung sai; đã tính lại accuracy/macro-F1 và kiểm tra ma trận/support/hash cho cả 5 bảng test. Xem [kiểm chứng local](local_verification.json). Không train trên máy cá nhân.
 - Mô hình có **468,010 tham số**. Forward batch 1 trên **cuda**: trung vị **0.576 ms**, P95 **0.666 ms**; 10 lượt làm nóng, 100 lượt đo. Chưa tính đọc ảnh, tiền xử lý, giao diện hoặc truyền mạng.
-- `demo/predict.py` là đường inference cơ bản. Giai đoạn 4 tiếp theo: giao diện chọn ảnh, top-3, so sánh MLP/CNN, ảnh đúng/sai và đặc trưng. Giai đoạn 5 mới hoàn thiện báo cáo/slide/bàn giao.
+- `demo/du_doan_anh.py` là đường inference cơ bản. Giai đoạn 4 tiếp theo: giao diện chọn ảnh, top-3, so sánh MLP/CNN, ảnh đúng/sai và đặc trưng. Giai đoạn 5 mới hoàn thiện báo cáo/slide/bàn giao.
 - Ảnh chụp thật khác phân phối Fashion-MNIST; không cam kết mô hình phân loại tốt mọi ảnh thời trang.
 
 ## Đối chiếu yêu cầu

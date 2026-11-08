@@ -6,43 +6,51 @@ import pandas as pd
 import torch
 from torch import nn
 
-from data.dataset import make_loader
-from models.networks import MODEL_CLASSES
-from utils.io import save_json, seed_all
-from utils.runtime import require_colab_gpu
+from data.chuan_bi_du_lieu import make_loader
+from models.kien_truc_mo_hinh import MODEL_CLASSES
+from utils.ho_tro_thuc_nghiem import save_json, seed_all
+from utils.kiem_tra_gpu import require_colab_gpu
 
 
 def run_epoch(model, loader, device, optimizer=None):
     training = optimizer is not None  # Không truyền optimizer nghĩa là chỉ đo.
     if training:
         require_colab_gpu()
+
     model.train(training)  # True: train mode; False: eval mode.
     criterion = nn.CrossEntropyLoss()  # Nhận logits [B,10] và nhãn nguyên [B].
     total_loss, correct, count = 0.0, 0, 0
+
     with torch.set_grad_enabled(training):
         for images, labels in loader:
             images, labels = images.to(device), labels.to(device)
+
             if training:
-                optimizer.zero_grad(
-                    set_to_none=True
-                )  # Xóa gradient, không xóa trọng số.
+                # Xóa gradient, không xóa trọng số.
+                optimizer.zero_grad(set_to_none=True)
+
             logits = model(images)  # Forward: ảnh -> điểm của 10 lớp.
             loss = criterion(logits, labels)
+
             if training:
                 loss.backward()  # Tính độ nhạy của loss theo từng tham số.
                 optimizer.step()  # Đây mới là dòng sửa trọng số.
+
             n = labels.size(0)  # Batch cuối có thể ít ảnh hơn các batch trước.
             total_loss += loss.item() * n
             correct += (logits.argmax(1) == labels).sum().item()
             count += n
+
     if count == 0:
         raise ValueError("Loader rỗng, không thể tính loss/accuracy.")
+
     return {"loss": total_loss / count, "accuracy": correct / count, "samples": count}
 
 
 def fit(name, data, config, device, run):
     require_colab_gpu()
     seed_all(config["seed"])
+
     model = MODEL_CLASSES[name]().to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=config["lr"])
     loader = make_loader(data["train"], config, training=True)
@@ -54,12 +62,15 @@ def fit(name, data, config, device, run):
         if config.get("scheduler", False)
         else None
     )
+
     best_loss, best_epoch, history = float("inf"), 0, []
     stop_reference, stale = float("inf"), 0
     started = time.perf_counter()
+
     for epoch in range(1, config["epochs"] + 1):
         train = run_epoch(model, loader, device, optimizer)
         val = run_epoch(model, validation, device)  # Không cập nhật trọng số.
+
         history.append(
             dict(
                 epoch=epoch,
@@ -70,6 +81,7 @@ def fit(name, data, config, device, run):
                 lr=optimizer.param_groups[0]["lr"],
             )
         )
+
         payload = dict(
             model_name=name,
             state_dict=model.state_dict(),
@@ -79,15 +91,19 @@ def fit(name, data, config, device, run):
             std=data["std"],
             classes=data["classes"],
         )
+
         if val["loss"] < best_loss:  # Hòa thì giữ epoch sớm hơn.
             best_loss, best_epoch = val["loss"], epoch
             torch.save(payload, run / "checkpoints" / f"{name}_best.pt")
+
         if val["loss"] < stop_reference - config.get("min_delta", 0.0):
             stop_reference, stale = val["loss"], 0
         else:
             stale += 1
+
         if scheduler:
             scheduler.step(val["loss"])
+
         # Last phục vụ kiểm tra trạng thái cuối, chưa hỗ trợ resume chính xác.
         torch.save(
             {**payload, "optimizer": optimizer.state_dict()},
@@ -102,11 +118,13 @@ def fit(name, data, config, device, run):
             f"val_loss={val['loss']:.4f} val_acc={val['accuracy']:.4f}",
             flush=True,
         )
+
         if config.get("patience") and stale >= config["patience"]:
             print(
                 f"Early stopping at epoch {epoch}; best epoch {best_epoch}", flush=True
             )
             break
+
     info = dict(
         best_epoch=best_epoch,
         best_val_loss=best_loss,

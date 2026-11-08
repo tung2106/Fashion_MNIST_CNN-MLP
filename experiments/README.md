@@ -2,7 +2,7 @@
 
 - `runs/<run_id>/`: kết quả baseline và lựa chọn mô hình; mỗi run có config, preprocessing, splits, checkpoint, metrics, figures và source đã chạy.
 - `learning/`: kết quả thực hành ban đầu, chỉ giữ để tham khảo.
-- `source.zip`: gói mã hiện tại tạo bằng `python -m scripts.pack_source`.
+- `source.zip`: gói mã hiện tại tạo bằng `python -m scripts.dong_goi_colab`.
 
 Run được chọn: `runs/selection_20261104_144952_e58647/`. `runs/latest_selection.txt` chứa tên run tương đối để chuyển máy vẫn dùng được.
 

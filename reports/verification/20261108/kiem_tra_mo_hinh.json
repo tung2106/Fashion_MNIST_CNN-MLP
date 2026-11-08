@@ -1,0 +1,140 @@
+{
+  "checked_at": "2026-11-08T11:27:56.072699+07:00",
+  "source_run": "selection_20261104_144952_e58647",
+  "training_executed": false,
+  "device": "cpu",
+  "threads": 2,
+  "data": {
+    "train": 54000,
+    "validation": 6000,
+    "test": 10000,
+    "mean": 0.28620901703834534,
+    "std": 0.35315975546836853,
+    "class_counts": "5400/600/1000 per class",
+    "raw_hashes_verified": 8,
+    "matching_trial_splits": 9
+  },
+  "validation_selection": "cnn_plus_aug",
+  "architectures": {
+    "MLP": [
+      2,
+      10
+    ],
+    "CNN": [
+      2,
+      10
+    ],
+    "CNNPlus": [
+      2,
+      10
+    ],
+    "CNNDropout": [
+      2,
+      10
+    ],
+    "CNNBatchNorm": [
+      2,
+      10
+    ]
+  },
+  "saved_test_metrics": [
+    {
+      "trial": "mlp",
+      "accuracy": 0.8855,
+      "macro_f1": 0.8854841272580473,
+      "status": "PASS"
+    },
+    {
+      "trial": "cnn",
+      "accuracy": 0.9211,
+      "macro_f1": 0.9208998644376549,
+      "status": "PASS"
+    },
+    {
+      "trial": "cnn_plus_aug",
+      "accuracy": 0.937,
+      "macro_f1": 0.9366209635929847,
+      "status": "PASS"
+    },
+    {
+      "trial": "cnn_plus_aug_seed123",
+      "accuracy": 0.9384,
+      "macro_f1": 0.938251281701268,
+      "status": "PASS"
+    },
+    {
+      "trial": "cnn_plus_aug_seed2026",
+      "accuracy": 0.9387,
+      "macro_f1": 0.9381449469652665,
+      "status": "PASS"
+    }
+  ],
+  "stability": {
+    "accuracy": {
+      "mean": 0.9380333333333333,
+      "std": 0.0009073771725877099
+    },
+    "macro_f1": {
+      "mean": 0.9376723974198398,
+      "std": 0.0009121192839817452
+    }
+  },
+  "curated_report_tables_match": true,
+  "full_test_inference": [
+    {
+      "model": "MLP",
+      "checkpoint": "checkpoints/mlp.pt",
+      "samples": 10000,
+      "correct": 8855,
+      "accuracy": 0.8855,
+      "macro_f1": 0.8854841272580473,
+      "max_probability_difference": 1.5266181945805535e-06,
+      "inference_seconds": 1.5179101000003357,
+      "parameters": 101770,
+      "state_unchanged": true,
+      "invalid_images_rejected": true,
+      "repeatable_prediction": true,
+      "sha256": "1a1d915c5e943c242b7820fce19a845d654382c4aa12859487753e05e04c9bdb",
+      "status": "PASS"
+    },
+    {
+      "model": "CNN",
+      "checkpoint": "checkpoints/cnn.pt",
+      "samples": 10000,
+      "correct": 9211,
+      "accuracy": 0.9211,
+      "macro_f1": 0.9208998644376549,
+      "max_probability_difference": 1.2215721130193202e-06,
+      "inference_seconds": 2.5720273999995698,
+      "parameters": 206922,
+      "state_unchanged": true,
+      "invalid_images_rejected": true,
+      "repeatable_prediction": true,
+      "sha256": "42e484e4f333511313a33d347a962a164d66baff79caa049e3034829a45e9cc8",
+      "status": "PASS"
+    },
+    {
+      "model": "CNNPlus",
+      "checkpoint": "checkpoints/cnn_plus.pt",
+      "samples": 10000,
+      "correct": 9370,
+      "accuracy": 0.937,
+      "macro_f1": 0.9366209635929847,
+      "max_probability_difference": 4.751653289836177e-06,
+      "inference_seconds": 7.8605962000001455,
+      "parameters": 468010,
+      "state_unchanged": true,
+      "invalid_images_rejected": true,
+      "repeatable_prediction": true,
+      "sha256": "8b835f79034215d26c0c3a181c6ef941d3f774383e8c61395918baff5130846b",
+      "status": "PASS"
+    }
+  ],
+  "immutable_files_verified": 177,
+  "status": "PASS",
+  "limits": [
+    "No training/optimizer/GPU regression executed locally.",
+    "Test set was already inspected earlier; not a fresh unseen holdout.",
+    "Only Fashion-MNIST grayscale 28x28, not real camera photos."
+  ]
+}

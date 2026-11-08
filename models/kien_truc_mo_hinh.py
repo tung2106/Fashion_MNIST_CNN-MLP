@@ -28,6 +28,7 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(2),  # [B,32,7,7].
         )
+
         self.classifier = nn.Sequential(
             nn.Flatten(),  # [B,32*7*7] = [B,1568].
             nn.Linear(32 * 7 * 7, 128),  # Tổng hợp đặc trưng.
@@ -58,6 +59,7 @@ class CNNPlus(nn.Module):
                 ]
             )
         self.features = nn.Sequential(*layers)
+
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(64 * 7 * 7, 128),

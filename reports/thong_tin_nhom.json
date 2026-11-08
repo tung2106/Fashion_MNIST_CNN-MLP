@@ -1,0 +1,14 @@
+{
+  "de_tai": "Phân loại ảnh thời trang bằng CNN",
+  "mon_hoc": "Trí tuệ nhân tạo",
+  "truong": "Đại học Công nghiệp Hà Nội",
+  "khoa": "Khoa Công nghệ thông tin và Truyền thông",
+  "giang_vien": "Dương Hiền Thanh",
+  "thanh_vien": [
+    {"ma_sinh_vien": "2024601724", "ho_ten": "Trương Văn Hùng"},
+    {"ma_sinh_vien": "2024601547", "ho_ten": "Nguyễn Trọng Thái"},
+    {"ma_sinh_vien": "2024611308", "ho_ten": "Lò Thanh Tùng"},
+    {"ma_sinh_vien": "2024602074", "ho_ten": "Nguyễn Hữu Sáng"},
+    {"ma_sinh_vien": "2024602812", "ho_ten": "Ngô Khánh Hưng"}
+  ]
+}

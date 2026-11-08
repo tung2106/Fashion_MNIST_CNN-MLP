@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, transforms
 
-from utils.io import save_json
+from utils.ho_tro_thuc_nghiem import save_json
 
 
 def split_indices(labels, seed):
@@ -27,6 +27,7 @@ def prepare_data(root, config, run):
     train_ids, val_ids = split_indices(
         raw.targets, config.get("split_seed", config["seed"])
     )
+
     # Smoke dùng ít ảnh mỗi lớp, giữ nguyên split gốc để không lẫn train/val.
     if config["profile"] == "smoke":
 
@@ -37,14 +38,17 @@ def prepare_data(root, config, run):
 
         train_ids = take_per_class(train_ids, 32)
         val_ids = take_per_class(val_ids, 8)
+
     pixels = raw.data[train_ids].float() / 255.0
     mean, std = pixels.mean().item(), pixels.std(unbiased=False).item()
     del pixels  # Không giữ mảng float tạm trong suốt quá trình train.
+
     transform = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((mean,), (std,))]
     )
     source = datasets.FashionMNIST(root, train=True, transform=transform)
     train_source = source
+
     if config.get("augment", False):
         train_source = datasets.FashionMNIST(
             root,
@@ -58,6 +62,7 @@ def prepare_data(root, config, run):
                 ]
             ),
         )
+
     data = {
         "train": Subset(train_source, train_ids.tolist()),
         "validation": Subset(source, val_ids.tolist()),
@@ -66,6 +71,7 @@ def prepare_data(root, config, run):
         "classes": raw.classes,
         "transform": transform,
     }
+
     np.savez(run / "splits.npz", train=train_ids, validation=val_ids)
     save_json(
         run / "preprocessing.json",
@@ -82,6 +88,7 @@ def prepare_data(root, config, run):
             ).tolist(),
         },
     )
+
     return data
 
 

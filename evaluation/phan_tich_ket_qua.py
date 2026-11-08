@@ -18,11 +18,11 @@ from sklearn.metrics import accuracy_score, confusion_matrix, f1_score
 from torch.utils.data import Subset
 from torchvision.datasets import FashionMNIST
 
-from data.dataset import make_loader
-from evaluation.evaluate import predict
-from models.inference import load_model, predict_image
-from utils.io import file_hash, save_json
-from utils.paths import DATA_DIR, ROOT, latest_run
+from data.chuan_bi_du_lieu import make_loader
+from evaluation.danh_gia_mo_hinh import predict
+from models.du_doan import load_model, predict_image
+from utils.duong_dan import DATA_DIR, ROOT, latest_run
+from utils.ho_tro_thuc_nghiem import file_hash, save_json
 
 
 def main(suite):
@@ -227,8 +227,8 @@ def main(suite):
             ),
         ),
     )
-    shutil.copy2(__file__, report / "analyze_selection.py")
-    shutil.copy2(ROOT / "models/inference.py", report / "inference.py")
+    shutil.copy2(__file__, report / "phan_tich_ket_qua.py")
+    shutil.copy2(ROOT / "models/du_doan.py", report / "du_doan.py")
     print("ANALYSIS_COMPLETE", report)
     archive = shutil.make_archive(str(suite), "zip", suite)
     print("RESULT_ZIP:", archive)

@@ -1,0 +1,14 @@
+{
+  "split": "train",
+  "sample_ids": [
+    23905,
+    15200
+  ],
+  "visualization_seed": 2026,
+  "transforms": [
+    "RandomCrop(28, padding=2)",
+    "RandomHorizontalFlip(p=0.5)"
+  ],
+  "normalization_not_applied_to_display": true,
+  "training_executed": false
+}

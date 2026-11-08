@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-08T11:27:57.890351+07:00",
+  "status": "PASS",
+  "training_executed": false,
+  "notebook": "notebooks/06_demo_du_doan.ipynb",
+  "code_cells_executed_in_order": [
+    "setup",
+    "right",
+    "wrong",
+    "features",
+    "metrics"
+  ],
+  "saved_notebook_unchanged": true,
+  "cli_samples": [
+    183,
+    2914
+  ],
+  "top3_sample183": [
+    "Shirt",
+    "T-shirt/top",
+    "Dress"
+  ],
+  "invalid_id_exit_code": 2,
+  "powershell_launcher_no_open": "PASS",
+  "rendered_figures_reviewed": [
+    "sample_183.png",
+    "sample_2914.png"
+  ]
+}
