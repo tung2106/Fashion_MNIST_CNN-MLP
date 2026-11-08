@@ -4,6 +4,29 @@ Demo chạy offline trên CPU với checkpoint đã huấn luyện trên Colab. 
 
 ## Chạy ngay trên máy
 
+### Cài trên máy mới
+
+Ba checkpoint và các ảnh mẫu đã có trong GitHub. Demo chỉ cần các file này,
+không cần tải toàn bộ Fashion-MNIST hoặc chạy huấn luyện.
+Cài Python 3.12 và Git, sau đó chạy PowerShell:
+
+```powershell
+git clone https://github.com/tung2106/Fashion_MNIST_CNN-MLP.git
+cd Fashion_MNIST_CNN-MLP
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m demo.so_sanh_mo_hinh --sample 183
+Invoke-Item -LiteralPath 'demo/output/sample_183.png'
+```
+
+Thay `183` bằng `2914` để minh họa một dự đoán sai. Sau khi cài thư viện,
+demo chạy offline trên CPU. Báo cáo mới nằm ở
+`reports/bao_cao_phan_loai_thoi_trang_hoan_chinh.docx`.
+
+Trên macOS/Linux, tạo môi trường bằng `python3 -m venv .venv`, dùng
+`.venv/bin/python` thay cho `.\.venv\Scripts\python.exe` trong các lệnh,
+rồi mở ảnh PNG trong `demo/output/`.
+
 Lệnh gọn để dự đoán và tự mở hình: `.\demo\chay_demo.ps1 -Mau 183`.
 Đổi `183` thành `2914` để xem ví dụ sai. [Kịch bản trình bày](kich_ban_trinh_bay.md) có thứ tự demo 7 phút, câu hỏi thường gặp và cách chuẩn bị máy.
 

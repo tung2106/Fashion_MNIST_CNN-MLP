@@ -51,4 +51,4 @@ Mở [báo cáo Word đầy đủ](reports/bao_cao_phan_loai_thoi_trang_hoan_chi
 
 [Kiểm tra ngày 08/11/2026](reports/verification/20261108/bien_ban_kiem_tra.md): đã chạy lại 10.000 ảnh test cho mỗi checkpoint MLP/CNN/CNNPlus trên CPU; cả 30.000 nhãn dự đoán khớp kết quả Colab. Kiểm tra mã, chia dữ liệu, chuẩn hóa, bảng chỉ số và checkpoint đều đạt. Đây là kiểm tra suy luận với trọng số đã lưu, không phải lượt huấn luyện mới.
 
-ZIP, dữ liệu gốc, trọng số và hướng dẫn AI giữ local theo `.gitignore`. Khi clone GitHub, cần bổ sung checkpoint để chạy demo. Các notebook đã lưu trên Drive là bằng chứng lịch sử. Bản mã hiện hành dùng cấu trúc thư mục mới và demo offline; các notebook huấn luyện sau sắp xếp chưa chạy lại trên Colab.
+Ba checkpoint demo và ảnh mẫu có sẵn trong GitHub; xem [cài đặt trên máy mới](demo/README.md#cài-trên-máy-mới). ZIP, dữ liệu gốc, các trọng số thực nghiệm khác và hướng dẫn AI giữ local theo `.gitignore`. Các notebook đã lưu trên Drive là bằng chứng lịch sử. Bản mã hiện hành dùng cấu trúc thư mục mới và demo offline; các notebook huấn luyện sau sắp xếp chưa chạy lại trên Colab.

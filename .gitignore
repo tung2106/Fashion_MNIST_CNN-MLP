@@ -37,6 +37,11 @@ AGENTS.md
 *.rar
 *.7z
 
+# Three verified checkpoints distributed for offline demo
+!/models/checkpoints/mlp.pt
+!/models/checkpoints/cnn.pt
+!/models/checkpoints/cnn_plus.pt
+
 # Immutable run outputs stay local; reviewed tables/figures live in reports/.
 /experiments/runs/
 /experiments/learning/
